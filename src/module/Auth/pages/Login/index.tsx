@@ -1,7 +1,10 @@
+import { LoginLayout } from "../../../../core"
+
 export const LoginPage = () => {
   return (
-    <p>
-      Login page
-    </p>
+
+    <LoginLayout>
+    </LoginLayout>
+ 
   )
 }
