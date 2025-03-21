@@ -1,0 +1,78 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 100% de la altura de la pantalla */
+    width: 100vw;  /* 100% del ancho */
+    display: flex;
+    justify-content: center; /* Centrado horizontal por defecto */
+    align-items: center; /* Centrado vertical */
+    overflow-x: hidden; /* Previene scroll horizontal */
+    background-color: rgb(244, 244, 244);
+}
+
+.container1 {
+    background-color: snow;
+    border-radius: 5px;
+    width: auto; /* Cambiado de 80% a auto para adaptarse al contenido */
+    min-width: 200px; /* Ancho mínimo para evitar contenedores demasiado estrechos */
+    max-width: 300px; /* Máximo ancho para que se vea bien en 320px */
+    height: auto; /* Se ajusta automáticamente al contenido */
+    padding: 20px;
+    text-align: center; /* Centra el texto dentro del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    position: relative; /* Asegura que la posición sea relativa */
+    left: 0; /* Resetea cualquier desplazamiento */
+    transform: translateX(0); /* Resetea cualquier transformación */
+    overflow: hidden; /* Evita que el contenido se desborde */
+    display: inline-block; /* Permite que el contenedor se adapte al contenido */
+
+    height: calc(100% + 50px); /* Aumenta 50px en altura */
+    padding-bottom: 100px;
+}
+
+/* Estilo para elementos dentro del contenedor */
+.container1 * {
+    max-width: 100%; /* Asegura que ningún elemento interno sea más ancho que el contenedor */
+    word-wrap: break-word; /* Permite que el texto largo se rompa y continúe en la siguiente línea */
+    overflow-wrap: break-word; /* Versión moderna de word-wrap */
+}
+
+/* Estilo específico para imágenes dentro del contenedor */
+.container1 img {
+    max-width: 100%; /* Asegura que las imágenes no excedan el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de aspecto */
+    display: block; /* Elimina espacio extra debajo de las imágenes */
+    margin: 0 auto; /* Centra las imágenes */
+}
+
+/* Media query para desktop */
+@media screen and (min-width: 768px) {
+    
+    .container1 {
+        margin: 0; /* Quita el margen automático en desktop */
+        max-width: 400px; /* Opcional: hacer el contenedor más ancho en desktop */
+        display: inline-block; /* Mantiene la adaptación al contenido */
+
+        height: calc(100% + 50px); /* Aumenta 50px en altura */
+    }
+}
+
+/* Estilo para el contenedor de la imagen */
+.imgContainer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+}
+
+/* Estilo para el logo de Jook */
+.jookLogo {
+    max-width: 80px; /* Ajusta según necesites */
+    height: auto;
+}
