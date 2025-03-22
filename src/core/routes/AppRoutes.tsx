@@ -4,9 +4,12 @@ import AppRoutesEnum from "./routes";
 
 export default function AppRoutes() {
   return (
+
     <Routes>
       <Route path="/" element={<Navigate to={AppRoutesEnum.LOGIN} replace />} />
       <Route path="/auth/*" element={<AuthRoutes />} />
+      
     </Routes>
+
   );
 }
