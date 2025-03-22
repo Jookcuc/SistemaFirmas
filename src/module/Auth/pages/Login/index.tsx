@@ -9,7 +9,7 @@ export const LoginPage = () => {
     <Box>
 
       <Box>
-        <img></img>
+        <img alt="LoginPageImage"/>
       </Box>
 
       <Box>

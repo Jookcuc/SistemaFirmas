@@ -9,18 +9,17 @@ interface Props {
 }
 
 
-export const LoginLayout: FC<Props> = function(props) {
-  const title = props.title || "TextoEjemplo";
+export const LoginLayout: FC<Props> = function({ children, title = "TextoEjemplo" }) {
   
   return (
     <Box className="principalContainerLayoutLogin">
       <Box className="containerChildrens"> 
         <Typography variant="h2" component="h2">{title}</Typography>
         
-        {props.children}
+        {children}
 
         <Box className="logoContainer">
-          <img alt="JookLogo" src={Logo} className="jookLogo"></img>
+          <img alt="JookLogo" src={Logo} className="jookLogo"/>
         </Box>
 
         
