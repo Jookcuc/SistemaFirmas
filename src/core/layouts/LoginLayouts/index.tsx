@@ -1,6 +1,6 @@
 import './LoginLayout.css';
 import Logo from '../../../assets/assetsLogin/JookSimpleLogo.svg'
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography} from "@mui/material";
 
 
 export const LoginLayout = ({tittle="TextoEjemplo"}) => {
@@ -11,7 +11,8 @@ export const LoginLayout = ({tittle="TextoEjemplo"}) => {
 
         {/**Titulo Base layout**/}
         <Typography variant="h2" component="h2">{tittle}</Typography>
-
+        
+        
         {/**Other Things*/}
         
         {/**Imagen del logo de Jook*/}
