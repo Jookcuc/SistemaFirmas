@@ -1,10 +1,97 @@
+import { Box, Button, Divider, Step, StepButton, Stepper, TextField } from '@mui/material'
+import { LoginLayout } from '../../../../core'
+import './Register.css'
+import { useState } from 'react'
+import { SignatureModal } from '../../../../core/components';
+
+const steps = [
+  "Datos Personales",
+  "Datos de Acceso",
+];
 
 
 export const RegisterPage = () => {
+
+  const [open, setOpen] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = useState<{
+    [k: number]: boolean
+  }>({});
+
+  const handleOpen = () => () => {
+    setOpen(true);
+    console.log("MODAL ABIERTO  ")
+  }
+
+  const handleClose = () => () => setOpen(false);
+
+  const handleNext = () => () => {
+    setCompleted({
+      [0]: true,
+      [1]: false
+    })
+    setActiveStep(1)
+  }
+  const handleStep = (step: number) => () => {
+    handleComplete(step)
+    setActiveStep(step)
+  }
+
+  const handleComplete = (step: number) => {
+    setCompleted({
+      ...completed,
+      [activeStep]: true,
+      [step]: false
+    });
+  };
+
   return (
-    <div>
-      <p>Register Page</p>
-    </div>
+    <LoginLayout title="Creación de Cuenta">
+      <Box component="form" sx={{display: "flex", paddingTop:"0"}}>
+        <Box className="formStep" id="registerStep2" sx={{display: activeStep === 0 ? "flex": "none"}}>
+          <TextField></TextField>
+          <TextField></TextField>
+          <TextField></TextField>
+          <Box className="firmBox">
+            <TextField></TextField>
+            <Button variant="contained" onClick={handleOpen()} sx={{width:"30%"}}>
+              Firmar
+            </Button>
+          </Box>
+          <Button variant="contained" onClick={handleNext()} className="stepperRegister"> Siguiente </Button>
+        </Box>
+
+        <Divider 
+          className="registerDivider"
+          orientation="vertical" 
+          flexItem aria-hidden="true" 
+          sx={{
+            marginTop: "1.5rem",
+            borderColor: "black",
+            display: "none"
+          }}/>
+
+        <Box className="formStep inactive" id="registerStep2" sx={{display: activeStep === 1 ? "flex": "none"}}>
+          <TextField></TextField>
+          <TextField></TextField>
+          <TextField></TextField>
+          <Button variant="contained"> Registrarse </Button>
+        </Box>
+      </Box>
+
+      <Stepper nonLinear activeStep={activeStep} alternativeLabel className="stepperRegister">
+        {steps.map((label, index) => (
+          <Step key={label} completed={completed[index]}>
+            <StepButton color="inherit" onClick={handleStep(index)}>
+              {label}
+            </StepButton>
+          </Step>
+        ))}
+      </Stepper>
+
+      <SignatureModal open={open} handleClose={handleClose()} />
+      
+    </LoginLayout>
   )
 }
 
