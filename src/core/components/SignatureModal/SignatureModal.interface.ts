@@ -1,4 +1,5 @@
 export interface SignatureModalProps {
-    open: boolean;
-    handleClose: () => void;
-  }
+    open: boolean
+    handleClose: () => void
+    setFirm: (firm: string) => void
+  } 

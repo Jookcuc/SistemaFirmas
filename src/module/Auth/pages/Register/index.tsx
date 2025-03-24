@@ -1,8 +1,9 @@
-import { Box, Button, Divider, Step, StepButton, Stepper, TextField } from '@mui/material'
+import { Avatar, Box, Button, Divider, InputAdornment, Step, StepButton, Stepper, TextField } from '@mui/material'
 import { LoginLayout } from '../../../../core'
 import './Register.css'
 import { useState } from 'react'
 import { SignatureModal } from '../../../../core/components';
+import EditIcon from '@mui/icons-material/Edit';
 
 const steps = [
   "Datos Personales",
@@ -12,6 +13,7 @@ const steps = [
 
 export const RegisterPage = () => {
 
+  const [firm, setFirm] = useState("")
   const [open, setOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState<{
@@ -20,7 +22,6 @@ export const RegisterPage = () => {
 
   const handleOpen = () => () => {
     setOpen(true);
-    console.log("MODAL ABIERTO  ")
   }
 
   const handleClose = () => () => setOpen(false);
@@ -49,11 +50,24 @@ export const RegisterPage = () => {
     <LoginLayout title="Creación de Cuenta">
       <Box component="form" sx={{display: "flex", paddingTop:"0"}}>
         <Box className="formStep" id="registerStep2" sx={{display: activeStep === 0 ? "flex": "none"}}>
-          <TextField></TextField>
+          <TextField id='puto'></TextField>
           <TextField></TextField>
           <TextField></TextField>
           <Box className="firmBox">
-            <TextField></TextField>
+            <Box 
+              sx={{
+                display:"flex",
+                alignItems: "center",
+                gap: "1rem",
+                width: "70%", 
+                paddingX: "0.7rem",
+                border:"solid 2px #e5e5e5",
+                borderRadius:"4px"
+              }}
+            >
+              <EditIcon />
+              <img src={firm} style={{maxHeight: "6vh"}}/>
+            </Box>
             <Button variant="contained" onClick={handleOpen()} sx={{width:"30%"}}>
               Firmar
             </Button>
@@ -89,7 +103,7 @@ export const RegisterPage = () => {
         ))}
       </Stepper>
 
-      <SignatureModal open={open} handleClose={handleClose()} />
+      <SignatureModal open={open} handleClose={handleClose()} setFirm={setFirm}/>
       
     </LoginLayout>
   )
