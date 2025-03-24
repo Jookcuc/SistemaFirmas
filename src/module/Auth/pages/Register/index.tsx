@@ -61,8 +61,9 @@ export const RegisterPage = () => {
                 gap: "1rem",
                 width: "70%", 
                 paddingX: "0.7rem",
-                border:"solid 2px #e5e5e5",
-                borderRadius:"4px"
+                border:"solid 2px #cdcdcd",
+                borderRadius:"8px",
+                backgroundColor:"#ececec"
               }}
             >
               <EditIcon />

@@ -69,21 +69,21 @@ export const SignatureModal:FC<SignatureModalProps> = function({open, handleClos
         <ReactSignatureCanvas 
           ref={sigCanvas}
           canvasProps={{
-            style: {border: "3px #888 dashed",
+            style: {
+              border: "3px #888 dashed",
               borderRadius:"8px",
               width:"91.5%",
               height:"30vh",
               justifySelf:"center",
               display:"flex"
             }
-            }}>
-        </ReactSignatureCanvas>
+          }}
+        />
 
         <DialogActions 
           sx={{display:"flex", 
           justifyContent: "center", 
-          paddingTop:"0.3rem",
-          marginBottom:"1rem"}}
+          marginY:"0.7rem"}}
         >
           <Button 
             variant="contained"
@@ -95,7 +95,9 @@ export const SignatureModal:FC<SignatureModalProps> = function({open, handleClos
               fontSize: "20px",
               paddingY: "0.3rem"
             }}  
-          > Subir Firma </Button>
+          > 
+            Subir Firma 
+          </Button>
         </DialogActions>
 
       </Box>
