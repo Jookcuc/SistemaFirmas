@@ -55,7 +55,7 @@ export const Input: FC<TextFileProps> = function({
       value={value} // Asignar el valor del input
       onChange={onChange} // Asignar el manejador de cambios
       required={required} // Asignar si el campo es requerido
-      sx={{ bgcolor: "#ececec", width: "90%" }}
+      sx={{ bgcolor: "#ececec", width: "100%" }}
       slotProps={{
         input: {
           startAdornment: icon ? (
