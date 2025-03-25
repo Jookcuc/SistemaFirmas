@@ -19,7 +19,6 @@ export const LoginPage: React.FC = () => {
     console.log('Remember Me:', rememberMe);
     // Aquí puedes agregar la lógica para manejar el inicio de sesión
 
-
   };
 
   return (
@@ -34,7 +33,7 @@ export const LoginPage: React.FC = () => {
           <Box className="childContainer">
 
             <Box className="formContainer" component="form" onSubmit={handleSubmit}>
-
+            
               <Box className="inpuntContainer">
                 <Input
                   id="email"
@@ -81,7 +80,7 @@ export const LoginPage: React.FC = () => {
               </Box>
 
               <Button type="submit" variant="contained">Iniciar Sesión</Button>
-              
+
             </Box>
 
             <Box className="registerContainer">
