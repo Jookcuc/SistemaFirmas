@@ -1,0 +1,38 @@
+.authMailContainer{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.authCodeFieldsContainer{
+    display:flex;
+    gap: 0.5em;
+    padding: 1rem 0 2rem 0;
+}
+
+.authCodeButton{
+    margin-bottom: 1.5rem !important; 
+}
+
+@media screen and (min-width: 768px){
+    .authMailContainer{
+        max-width: 70%;
+        align-self: center;
+    }
+
+    .authCodeFieldsContainer{
+        padding: 2.5rem 0 3rem 0;
+    }
+
+    .authCodeButton{
+        margin-bottom: 3rem !important;
+    }
+}
+
+@media screen and (min-width: 1440px){
+    .authMailContainer{
+        max-width: 50%;
+        align-self: center;
+    }
+}
