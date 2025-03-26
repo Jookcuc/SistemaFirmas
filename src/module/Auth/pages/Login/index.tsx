@@ -1,23 +1,31 @@
 import './Login.css';
+import {LoginFormData} from './login.interface';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Checkbox, FormControlLabel, Typography, Box } from '@mui/material';
 import { LoginLayout } from '../../../../core';
 import { Input } from '../../../../core/components/';
 import mailIcon from '../../../../core/icon/IconsLogin/EmailIcon.svg';
 import passWodIcon from '../../../../core/icon/IconsLogin/KeyIcon.svg';
 import LoginImage from '../../../../assets/assetsLogin/ImagenLogin.svg';
-import { useState } from 'react';
+
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>(''); // Estado para el correo electrónico
-  const [password, setPassword] = useState<string>(''); // Estado para la contraseña
-  const [rememberMe, setRememberMe] = useState<boolean>(false); // Estado para "Recordarme"
+  const { 
+    control, 
+    handleSubmit, 
+    register 
+  } = useForm<LoginFormData>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false
+    }
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Previene el comportamiento predeterminado del formulario
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember Me:', rememberMe);
-    // Aquí puedes agregar la lógica para manejar el inicio de sesión
+  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+    console.log('Form Data:', data);
+    
+
 
 
   };
@@ -30,34 +38,43 @@ export const LoginPage: React.FC = () => {
 
       <Box className="containerLoginItems">
         <LoginLayout title="Bienvenido">
-
           <Box className="childContainer">
-
-            <Box className="formContainer" component="form" onSubmit={handleSubmit}>
-
+            <Box className="formContainer" component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
               <Box className="inpuntContainer">
                 <Input
+                  className="textField"
                   id="email"
                   label="Email"
                   variant="outlined"
                   type="email"
                   icon={mailIcon}
-                  value={email} // Pasar el valor del estado
-                  onChange={(e) => setEmail(e.target.value)} // Manejar el cambio
-                  required // Campo requerido
+                  control={control}
+                  name="email"
+                  required
+                  rules={{
+                    required: "El correo electrónico es obligatorio",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Por favor, introduce un correo electrónico válido"
+                    }
+                  }}
                 />
               </Box>
 
               <Box className="inpuntContainer">
                 <Input
+                  className="textField"
                   id="password"
                   label="Password"
                   variant="outlined"
                   type="password"
                   icon={passWodIcon}
-                  value={password} // Pasar el valor del estado
-                  onChange={(e) => setPassword(e.target.value)} // Manejar el cambio
-                  required // Campo requerido
+                  control={control}
+                  name="password"
+                  required
+                  rules={{
+                    required: "La contraseña es obligatoria"
+                  }}
                 />
               </Box>
 
@@ -66,8 +83,7 @@ export const LoginPage: React.FC = () => {
                   control={
                     <Checkbox
                       size="small"
-                      checked={rememberMe} // Estado del checkbox
-                      onChange={(e) => setRememberMe(e.target.checked)} // Manejar el cambio
+                      {...register('rememberMe')}
                     />
                   }
                   label="Remember me"
@@ -81,17 +97,15 @@ export const LoginPage: React.FC = () => {
               </Box>
 
               <Button type="submit" variant="contained">Iniciar Sesión</Button>
-              
+
             </Box>
 
             <Box className="registerContainer">
               <Typography component="p">Don't have an account?</Typography>
-              <Typography component="a" href="#" color="primary" sx={{ textDecoration: "none" }}>
+              <Typography component="a" href="/Register" color="primary" sx={{ textDecoration: "none" }}>
                 Register
               </Typography>
-
             </Box>
-
           </Box>
         </LoginLayout>
       </Box>
