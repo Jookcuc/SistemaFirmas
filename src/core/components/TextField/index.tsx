@@ -1,20 +1,24 @@
-import { TextFileProps } from './TextField.interface';
+import { InputProps } from "./TextField.interface";
 import { useState } from "react";
+import { Controller, FieldValues } from "react-hook-form";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
-import { FC } from "react";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-export const Input: FC<TextFileProps> = function({ 
-  id = "outlined-basic", 
-  label, 
-  variant = "outlined", 
+
+export function Input<T extends FieldValues>({ 
+  className,
+  name,
+  label,
+  control,
   type = "text",
   icon,
-  value, // Agregado para manejar el valor del input
-  onChange, // Agregado para manejar el cambio del input
-  required = false // Agregado para manejar si el campo es requerido
-}) {
+  variant = "outlined",
+  required = false,
+  rules = {},
+  id,
+  message
+}: InputProps<T>) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => {
@@ -25,9 +29,10 @@ export const Input: FC<TextFileProps> = function({
     event.preventDefault();
   };
 
+  
   const inputType = type === "password" && showPassword ? "text" : type;
 
-  // Preparar el adorno de finalización para contraseñas
+
   const endAdornment = type === "password" ? (
     <InputAdornment position="end">
       <IconButton
@@ -46,27 +51,49 @@ export const Input: FC<TextFileProps> = function({
   ) : null;
 
   return (
-    <TextField 
-      className="TextField"
-      id={id} 
-      label={label} 
-      type={inputType}
-      variant={variant} 
-      value={value} // Asignar el valor del input
-      onChange={onChange} // Asignar el manejador de cambios
-      required={required} // Asignar si el campo es requerido
-      sx={{ bgcolor: "#ececec", width: "100%" }}
-      slotProps={{
-        input: {
-          startAdornment: icon ? (
-            <InputAdornment position="start">
-              <img src={icon} alt="icon" style={{ width: 20, height: 20 }} />
-            </InputAdornment>
-          ) : null,
-          endAdornment: endAdornment
-        }
+    <Controller
+      name={name}
+      control={control}
+      rules={{
+        required: required ? "Este campo es obligatorio" : false,
+        ...(type === "email" ? {
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Por favor, introduce un correo electrónico válido"
+          }
+        } : {}),
+        ...rules
       }}
-      margin="dense"
+      render={({ 
+        field, 
+        fieldState: { error } 
+      }) => (
+        <TextField
+          {...field}
+          id={id}
+          className={className}
+          label={label}
+          type={inputType}
+          variant={variant}
+          error={!!error}
+          helperText={error?.message || message}
+          required={required}
+          sx={{ bgcolor: "#ececec", width: "100%" }}
+          InputProps={{
+            startAdornment: icon ? (
+              <InputAdornment position="start">
+                <img 
+                  src={icon} 
+                  alt="icon" 
+                  style={{ width: 20, height: 20 }} 
+                />
+              </InputAdornment>
+            ) : null,
+            endAdornment: endAdornment
+          }}
+          margin="dense"
+        />
+      )}
     />
   );
 }
