@@ -8,7 +8,7 @@ import mailIcon from '../../../../core/icon/IconsLogin/EmailIcon.svg';
 import passWodIcon from '../../../../core/icon/IconsLogin/KeyIcon.svg';
 import LoginImage from '../../../../assets/assetsLogin/ImagenLogin.svg';
 import { useTranslation } from 'react-i18next';
-import { use } from 'react';
+
 
 
 
@@ -57,10 +57,10 @@ export const LoginPage: React.FC = () => {
                   control={control}
                   name="email"
                   rules={{
-                    required: "El correo electrónico es obligatorio",
+                    required: t("StringsAuth.required.emailObligatory"),
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Por favor, introduce un correo electrónico válido"
+                      message: t("StringsAuth.required.correctEmail")
                     }
                   }}
                 />
@@ -77,7 +77,7 @@ export const LoginPage: React.FC = () => {
                   control={control}
                   name="password"
                   rules={{
-                    required: "La contraseña es obligatoria"
+                    required: t("StringsAuth.required.passwordObligatory")
                   }}
                 />
               </Box>

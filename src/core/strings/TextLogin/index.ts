@@ -19,6 +19,13 @@ export const StringsAuth = {
         "links": {
           "forgotPassword": "¿Olvidaste tu contraseña?",
           "noAccount": "¿No tienes una cuenta?"
+        },
+        "required":{
+          "passwordObligatory":"La contraseña es obligatoria",
+          "emailObligatory":"El correo electrónico es obligatorio",
+          "correctEmail":"Por favor, introduce un correo electrónico válido",
+
+
         }
       }
     }
@@ -43,6 +50,14 @@ export const StringsAuth = {
         "links": {
           "forgotPassword": "Forgot Password?",
           "noAccount": "Don't have an account?"
+        },
+
+        "required":{
+          "passwordObligatory":"Password is required",
+          "emailObligatory":"Email is required",
+          "correctEmail":"Please enter a valid email address",
+
+
         }
       }
     }

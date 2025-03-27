@@ -18,9 +18,7 @@ export function Input<T extends FieldValues>({
   rules = {},
   id,
   message,
-  maxLength,
-  onchange
-  
+  maxLength
 }: InputProps<T>) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
