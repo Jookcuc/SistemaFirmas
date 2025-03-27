@@ -1,10 +1,11 @@
 
+import { ChangeEvent } from 'react';
 import { Control, FieldValues, Path } from 'react-hook-form';
 
 export interface InputProps<T extends FieldValues> {
-  className: string;
+  className?: string;
   name: Path<T>;
-  label: string;
+  label?: string;
   control: Control<T>;
   type?: string;
   icon?: string;
@@ -13,4 +14,6 @@ export interface InputProps<T extends FieldValues> {
   rules?: object;
   id?: string;
   message?: string;
+  maxLength?: number;
+  onchange?: (e: ChangeEvent<HTMLInputElement>) => void
 }

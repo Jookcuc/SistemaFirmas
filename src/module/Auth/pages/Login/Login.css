@@ -60,7 +60,7 @@
 
 /** MEDIDAS PARA PC**/
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1024px) {
 
     .principalContainerLogin{
     width: 100%;

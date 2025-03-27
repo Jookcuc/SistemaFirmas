@@ -17,7 +17,10 @@ export function Input<T extends FieldValues>({
   required = false,
   rules = {},
   id,
-  message
+  message,
+  maxLength,
+  onchange
+  
 }: InputProps<T>) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -78,18 +81,28 @@ export function Input<T extends FieldValues>({
           error={!!error}
           helperText={error?.message || message}
           required={required}
-          sx={{ bgcolor: "#ececec", width: "100%" }}
-          InputProps={{
-            startAdornment: icon ? (
-              <InputAdornment position="start">
-                <img 
-                  src={icon} 
-                  alt="icon" 
-                  style={{ width: 20, height: 20 }} 
-                />
-              </InputAdornment>
-            ) : null,
-            endAdornment: endAdornment
+          sx={{ 
+            width: "100%", 
+            "& input": { textAlign: maxLength ? "center" : "start", bgcolor: "#ececec"},
+            "& div": { bgcolor: "#ececec"}
+          }}
+          slotProps={{
+            input:{
+              startAdornment: icon ? (
+                <InputAdornment position="start">
+                  <img 
+                    src={icon} 
+                    alt="icon" 
+                    style={{ width: 20, height: 20 }} 
+                  />
+                </InputAdornment>
+              ) : null,
+              endAdornment: endAdornment,
+            },
+            htmlInput:{
+              maxLength: maxLength || undefined,
+              inputMode: maxLength ? "numeric" : "text",
+            }
           }}
           margin="dense"
         />

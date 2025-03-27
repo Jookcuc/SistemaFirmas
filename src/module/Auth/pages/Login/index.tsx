@@ -7,9 +7,15 @@ import { Input } from '../../../../core/components/';
 import mailIcon from '../../../../core/icon/IconsLogin/EmailIcon.svg';
 import passWodIcon from '../../../../core/icon/IconsLogin/KeyIcon.svg';
 import LoginImage from '../../../../assets/assetsLogin/ImagenLogin.svg';
+import { useTranslation } from 'react-i18next';
+import { use } from 'react';
+
 
 
 export const LoginPage: React.FC = () => {
+  
+  const {t}=useTranslation();
+
   const { 
     control, 
     handleSubmit, 
@@ -37,20 +43,19 @@ export const LoginPage: React.FC = () => {
       </Box>
 
       <Box className="containerLoginItems">
-        <LoginLayout title="Bienvenido">
+        <LoginLayout title={t("StringsAuth.title.welcome")}>
           <Box className="childContainer">
             <Box className="formContainer" component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
               <Box className="inpuntContainer">
                 <Input
                   className="textField"
                   id="email"
-                  label="Email"
+                  label={t("StringsAuth.inputs.email")}
                   variant="outlined"
                   type="email"
                   icon={mailIcon}
                   control={control}
                   name="email"
-                  required
                   rules={{
                     required: "El correo electrónico es obligatorio",
                     pattern: {
@@ -65,13 +70,12 @@ export const LoginPage: React.FC = () => {
                 <Input
                   className="textField"
                   id="password"
-                  label="Password"
+                  label={t("StringsAuth.inputs.password")}
                   variant="outlined"
                   type="password"
                   icon={passWodIcon}
                   control={control}
                   name="password"
-                  required
                   rules={{
                     required: "La contraseña es obligatoria"
                   }}
@@ -86,24 +90,24 @@ export const LoginPage: React.FC = () => {
                       {...register('rememberMe')}
                     />
                   }
-                  label="Remember me"
+                  label={t("StringsAuth.checkboxes.rememberMe")}
                   labelPlacement="end"
                   sx={{ fontSize: "small" }}
                 />
 
                 <Typography component="a" href="#" color="primary" sx={{ textDecoration: "none" }}>
-                  Forgot Password?
+                  {t('StringsAuth.links.forgotPassword')}
                 </Typography>
               </Box>
 
-              <Button type="submit" variant="contained">Iniciar Sesión</Button>
+              <Button type="submit" variant="contained">{t("StringsAuth.buttons.login")}</Button>
 
             </Box>
 
             <Box className="registerContainer">
-              <Typography component="p">Don't have an account?</Typography>
+              <Typography component="p">{t("StringsAuth.links.noAccount")}</Typography>
               <Typography component="a" href="/Register" color="primary" sx={{ textDecoration: "none" }}>
-                Register
+              {t("StringsAuth.buttons.register")}
               </Typography>
             </Box>
           </Box>
