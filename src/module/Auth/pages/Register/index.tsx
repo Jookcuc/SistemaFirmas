@@ -23,50 +23,44 @@ export const RegisterPage = () => {
     handleSubmit,
     watch,
     control,
+    setValue,
     trigger,
+    register,
     formState: { errors }
   } = useForm<RegisterFormData>({
     defaultValues: {
       name:"",
       lastName:"",
       productKey:"",
-      firm:"",
+      signature:"",
       email:"",
       password:"",
       confirmPassword:""
     }
   })
 
-  const [firm, setFirm] = useState("")
-  const [firmError, setFirmError] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [open, setOpen] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState< {[k: number]: boolean} >({})
 
-  useEffect(() => {
-    if(submitted){
-      setFirmError(!firm)
-    }
-  }, [firm, submitted])
 
   useEffect(() => {
-    if(submitted){
-      trigger([
-        "name", "lastName", "productKey", "email", "password", "confirmPassword"
-      ])
+    if (submitted) {
+      trigger(["name", "lastName", "productKey", "signature"]);
     }
-  }, [
-    watch("name"), watch("lastName"), watch("productKey"), 
-    watch("email"), watch("password"), watch("confirmPassword")
-  ])
+  }, [watch("name"), watch("lastName"), watch("productKey"), watch("signature")]);
+
+  useEffect(() => {
+    register("signature", { required: "The signature is required" });
+  }, [register]);
+
+  const sign = (signature:string) => {
+    setValue("signature", signature);
+    trigger("signature")
+  }
 
   const onSubmit = handleSubmit( (data) => {
-    setSubmitted(true)
-    if (!firm) {
-      setFirmError(true)
-      return
-    }
     console.log("Formulario enviado:", data)
   })
 
@@ -79,11 +73,10 @@ export const RegisterPage = () => {
   } 
 
   const handleNext = async () => {
-    const isValid = await trigger(["name", "lastName", "productKey"])
+    const isValid = await trigger(["name", "lastName", "productKey", "signature"])
     setSubmitted(true)
 
-    if (!isValid || !firm) {
-      setFirmError(!firm);
+    if (!isValid) {
       return
     }
     
@@ -94,8 +87,8 @@ export const RegisterPage = () => {
 
     setActiveStep(1)
   }
-  const handleStep = (step: number) => {
 
+  const handleStep = (step: number) => {
     if(step === 1){
       handleNext()
     }
@@ -117,7 +110,6 @@ export const RegisterPage = () => {
     <LoginLayout title="Creación de Cuenta" className="backgroundLayout">
       <Box component="form" sx={{display: "flex", paddingTop:"0"}} onSubmit={onSubmit}>
         <Box className="formStep" id="registerStep2" sx={{display: activeStep === 0 ? "flex": "none"}}>
-          
           <Input
             id="name"
             name="name"
@@ -172,11 +164,12 @@ export const RegisterPage = () => {
                   justifyContent: "flex-start",
                   alignItems: "center",
                   gap: "1rem",
-                  width: "70%", 
+                  width: "70%",
+                  height:"3.5rem", 
                   paddingX: "0.7rem",
                   border:"solid 1px #b5b5b5",
                   borderRadius:"8px",
-                  borderColor: firmError ? "#c23f38" : "#b5b5b5",
+                  borderColor: errors.signature ? "#c23f38" : "#b5b5b5",
                   backgroundColor:"#ececec",
                   paddingBottom:0
                 }}
@@ -185,21 +178,23 @@ export const RegisterPage = () => {
                   <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
                 </InputAdornment>
 
-                <img src={firm} style={{maxHeight: "5vh"}}/>
+                <img src={watch("signature")} style={{maxHeight: "6.3vh"}}/>
               </Box>
 
               <Button variant="contained" onClick={handleOpen} sx={{width:"30%"}}>
                 Firmar
               </Button>
             </Box>
-            {firmError && (
-            <FormHelperText error sx={{
-              marginTop:0,
-              marginLeft: "14px"
-            }}>
-              The firm is necesary
+
+            <FormHelperText 
+              error
+              sx={{
+                marginTop:0,
+                marginLeft: "14px",
+              }}
+            >
+              {errors.signature?.message || " "}
             </FormHelperText>
-          )}
           </Box>
           
           <Button variant="contained" onClick={handleNext} className="stepperRegister"> Siguiente </Button>
@@ -292,7 +287,7 @@ export const RegisterPage = () => {
         ))}
       </Stepper>
 
-      <SignatureModal open={open} handleClose={handleClose} setFirm={setFirm}/>
+      <SignatureModal open={open} handleClose={handleClose} setFirm={sign}/>
       
     </LoginLayout>
   )
