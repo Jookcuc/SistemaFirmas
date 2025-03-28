@@ -57,7 +57,13 @@ export const RegisterPage = () => {
     if(password){
       trigger("confirmPassword")
     }
-  }, [password, trigger]);
+  }, [password, confirmPassword, trigger]);
+
+  useEffect(() => {
+    if(email){
+      trigger("email")
+    }
+  }, [email, trigger]);
 
   useEffect(() => {
     if (submitted) {
@@ -75,7 +81,7 @@ export const RegisterPage = () => {
   }
 
   const onSubmit = handleSubmit( (data) => {
-    console.log("Formulario enviado:", data)
+    //Inset the code when you send the data
   })
 
   const handleOpen = () => {

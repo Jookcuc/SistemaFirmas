@@ -38,7 +38,7 @@ export const StringsAuth = {
           "lastNameRequired": "El apellido es obligatorio",
           "productKeyRequired": "La clave del producto es obligatoria",
           "signRequired": "La firma es obligatoria",
-          "confirmPasswordRequired": "El confirmar tu contraseña es obligatorio",
+          "confirmPasswordRequired": "El campo Confirmar Contraseña es obligatorio",
           "confirmationCodeRequired": "Por favor, rellene todos los campos del código"
         },
         "validations":{
@@ -101,7 +101,7 @@ export const StringsAuth = {
           "lastNameRequired": "Last name is requiered",
           "productKeyRequired": "Product key is requiered",
           "signRequired": "Signature is required",
-          "confirmPasswordRequired": "Password confirmation is required",
+          "confirmPasswordRequired": "The field Confirm Password is required",
           "confirmationCodeRequired": "Please fill all fields of the code"
         },
         "validations":{

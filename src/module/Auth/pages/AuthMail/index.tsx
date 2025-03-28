@@ -1,7 +1,7 @@
 import './AuthMail.css'
 import { Box, Button, Typography } from "@mui/material"
 import { LoginLayout, OtpTextField } from "../../../../core"
-import { ChangeEvent, ClipboardEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, ClipboardEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export const AuthMailPage = () => {
@@ -9,22 +9,20 @@ export const AuthMailPage = () => {
   
   const [values, setValues] = useState(Array(6).fill(""))
   const [error, setError] = useState(false)
+  const inputRefs = useRef([] as (HTMLInputElement | null)[])
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {id, value} = e.target
-    const newValue = value.replace(/\D/g, "");
+  useEffect(() => {
+    inputRefs.current = inputRefs.current.slice(0, 6)
+  }, [])
 
-    const index = Number(id.replace("verificationCode", ""))
-
-    const newValues = [...values];
-    newValues[index] = newValue;
-    setValues(newValues);
+  const onChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const newValue = e.target.value.replace(/\D/g, "")
+    const newValues = [...values]
+    newValues[index] = newValue
+    setValues(newValues)
 
     if(newValue && index<5){
-      const nextInput = document.getElementById(`verificationCode${index + 1}`)
-      if (nextInput) {
-        (nextInput as HTMLInputElement).focus();
-      }
+      inputRefs.current[index + 1]?.focus()
     }
   }
 
@@ -47,11 +45,10 @@ export const AuthMailPage = () => {
     e.preventDefault()
     if(values.every((char) => char !== "")){
       setError(false)
-      console.log(values.join(""))
+      // values.join("") This function join the characters use it when you send the code to validate
     }
     else{
       setError(true)
-      console.log("AAAAAAAAA")
     }
   }
 
@@ -74,8 +71,9 @@ export const AuthMailPage = () => {
                 id={`verificationCode${index}`}
                 className="verificationCodeInput"
                 value={val}
-                onChange={onChange}
+                onChange={(e) => onChange(e, index)}
                 onPaste={onPaste}
+                ref={(el) => { if (el) inputRefs.current[index] = el; }}
               />
             ))}
           </Box>

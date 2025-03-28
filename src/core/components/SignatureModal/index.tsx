@@ -11,7 +11,7 @@ export const SignatureModal:FC<SignatureModalProps> =({open, handleClose, setFir
 
 
   const handleSaveSignature = () => {
-    var firmData = ""
+    let firmData = ""
     if(sigCanvas.current){
       if(!sigCanvas.current.isEmpty()){
         firmData = sigCanvas.current.toDataURL('image/svg+xml')
