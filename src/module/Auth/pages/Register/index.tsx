@@ -27,7 +27,7 @@ export const RegisterPage = () => {
     setValue,
     trigger,
     register,
-    formState: { errors }
+    formState: { errors, isSubmitted }
   } = useForm<RegisterFormData>({
     defaultValues: {
       name:"",
@@ -51,6 +51,13 @@ export const RegisterPage = () => {
   const [open, setOpen] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState< {[k: number]: boolean} >({})
+
+
+  useEffect(() => {
+    if(isSubmitted){
+      trigger("confirmPassword")
+    }
+  }, [password, confirmPassword, trigger]);
 
   useEffect(() => {
     if(email){
