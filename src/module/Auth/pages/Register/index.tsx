@@ -52,13 +52,6 @@ export const RegisterPage = () => {
   const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState< {[k: number]: boolean} >({})
 
-
-  useEffect(() => {
-    if(password){
-      trigger("confirmPassword")
-    }
-  }, [password, confirmPassword, trigger]);
-
   useEffect(() => {
     if(email){
       trigger("email")
