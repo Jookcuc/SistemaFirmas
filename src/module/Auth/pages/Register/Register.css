@@ -1,0 +1,47 @@
+.formStep {
+    padding: 3rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.formStep *{
+    max-width: 100%;
+}
+
+.firmBox{
+    display: flex;
+    justify-content: space-between;
+    gap: 1.2rem;
+}
+
+
+@media screen and (min-width: 768px){
+
+    .formStep {
+        padding: 5rem 2rem;
+    }
+
+    .stepperRegister{
+        display: none !important;
+    }
+
+    .registerDivider{
+        display: flex !important;
+    }
+
+    #registerStep1{
+        display: flex;
+    }
+
+    #registerStep2{
+        display: flex;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .formStep{
+        margin: 0 2.5rem;
+    }
+}
