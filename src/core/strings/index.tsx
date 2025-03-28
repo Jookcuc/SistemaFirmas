@@ -1,4 +1,4 @@
-export * from "./TextLogin";
+export * from "./StringsAuth";
 
 
 
