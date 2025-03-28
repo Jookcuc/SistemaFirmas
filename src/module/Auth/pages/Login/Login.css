@@ -6,12 +6,11 @@
 .principalContainerLogin{
     width: 100%;
     height: 100vh;
-    background-color: rgb(244, 244, 244);
 
 }
 
 .containerLoginItems{
-    background-color: white;    
+   
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +30,13 @@
 .formContainer{
     display: flex;
     flex-direction: column;
-    gap:1rem;
+    gap:1.5rem;
+}
+
+.loginLayoutContainer{
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+    background-color: transparent !important;
 }
 
 .rememberandforgotContainer{
@@ -60,7 +65,8 @@
 
 /** MEDIDAS PARA PC**/
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1020px) {
+
 
     .principalContainerLogin{
     width: 100%;
@@ -94,4 +100,42 @@
         align-items: center;
     }
 
+    .loginLayoutContainer{
+        background-color: white !important;
+    }
+}
+
+@media screen and (min-width: 1200px)  {
+    .containerLoginImage{
+        width: 55%;
+    }
+    
+    .containerLoginItems{
+        width: 45%;
+    }
+
+
+    .loginLayoutContainer{
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+        padding-left: 5rem !important;
+        padding-right: 5rem !important;
+        background-color: white !important;
+
+    }
+
+    .rememberandforgotContainer{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content:space-between;
+        align-items: center;
+    }
+
+    .LoginImage{
+        display: flex;
+        width: 40rem;
+        height: 40rem;
+    
+        }
 }
