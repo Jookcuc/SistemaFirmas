@@ -7,13 +7,16 @@ import { Input } from '../../../../core/components/';
 import mailIcon from '../../../../core/icon/IconsLogin/EmailIcon.svg';
 import passWodIcon from '../../../../core/icon/IconsLogin/KeyIcon.svg';
 import LoginImage from '../../../../assets/assetsLogin/ImagenLogin.svg';
-
+import { useTranslation } from 'react-i18next';
 
 export const LoginPage: React.FC = () => {
+  const {t} = useTranslation();
+
   const { 
     control, 
     handleSubmit, 
-    register 
+    register,
+    watch 
   } = useForm<LoginFormData>({
     defaultValues: {
       email: '',
@@ -22,12 +25,12 @@ export const LoginPage: React.FC = () => {
     }
   });
 
+  // Watch email and password fields
+  const email = watch('email');
+  const password = watch('password');
+
   const onSubmit: SubmitHandler<LoginFormData> = (data) => {
     console.log('Form Data:', data);
-    
-
-
-
   };
 
   return (
@@ -37,23 +40,25 @@ export const LoginPage: React.FC = () => {
       </Box>
 
       <Box className="containerLoginItems">
-        <LoginLayout title="Bienvenido">
+        <LoginLayout title={t("StringsAuth.title.welcome")} className="loginLayoutContainer" >
           <Box className="childContainer">
             <Box className="formContainer" component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+              
               <Box className="inpuntContainer">
                 <Input
                   className="textField"
                   id="email"
-                  label="Email"
+                  label={t("StringsAuth.inputs.email")}
+                  variant="outlined"
                   type="email"
                   icon={mailIcon}
                   control={control}
                   name="email"
                   rules={{
-                    required: "El correo electrónico es obligatorio",
+                    required: t("StringsAuth.required.emailObligatory"),
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Por favor, introduce un correo electrónico válido"
+                      message: t("StringsAuth.required.correctEmail")
                     }
                   }}
                 />
@@ -63,13 +68,14 @@ export const LoginPage: React.FC = () => {
                 <Input
                   className="textField"
                   id="password"
-                  label="Password"
+                  label={t("StringsAuth.inputs.password")}
+                  variant="outlined"
                   type="password"
                   icon={passWodIcon}
                   control={control}
                   name="password"
                   rules={{
-                    required: "La contraseña es obligatoria"
+                    required: t("StringsAuth.required.passwordObligatory")
                   }}
                 />
               </Box>
@@ -82,24 +88,30 @@ export const LoginPage: React.FC = () => {
                       {...register('rememberMe')}
                     />
                   }
-                  label="Remember me"
+                  label={t("StringsAuth.checkboxes.rememberMe")}
                   labelPlacement="end"
                   sx={{ fontSize: "small" }}
                 />
 
                 <Typography component="a" href="#" color="primary" sx={{ textDecoration: "none" }}>
-                  Forgot Password?
+                  {t('StringsAuth.links.forgotPassword')}
                 </Typography>
               </Box>
 
-              <Button type="submit" variant="contained">Iniciar Sesión</Button>
+              <Button 
+                type="submit" 
+                variant="contained" 
+                disabled={!email || !password}
+              >
+                {t("StringsAuth.buttons.login")}
+              </Button>
 
             </Box>
 
             <Box className="registerContainer">
-              <Typography component="p">Don't have an account?</Typography>
-              <Typography component="a" href="/Register" color="primary" sx={{ textDecoration: "none" }}>
-                Register
+              <Typography component="p">{t("StringsAuth.links.noAccount")}</Typography>
+              <Typography component="a" href="./register" color="primary" sx={{ textDecoration: "none" }}>
+              {t("StringsAuth.buttons.register")}
               </Typography>
             </Box>
           </Box>

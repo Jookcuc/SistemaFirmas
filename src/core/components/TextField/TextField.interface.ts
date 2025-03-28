@@ -1,4 +1,5 @@
 
+import { ChangeEvent } from 'react';
 import { Control, FieldValues, Path } from 'react-hook-form';
 
 export interface InputProps<T extends FieldValues> {
@@ -13,4 +14,6 @@ export interface InputProps<T extends FieldValues> {
   rules?: object;
   id?: string;
   message?: string;
+  maxLength?: number;
+  onchange?: (e: ChangeEvent<HTMLInputElement>) => void
 }

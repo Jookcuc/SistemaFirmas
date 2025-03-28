@@ -10,7 +10,7 @@ export const LoginLayout: FC<LoginLayoutProps> = function({ children, title = "T
   
   return (
     <Box className="principalContainerLayoutLogin">
-      <Box className={ className ? "containerChildrens " + className : "containerChildrens"}> 
+      <Box className={className ? "containerChildrens " + className : "containerChildrens"}> 
         <Typography variant="h2" component="h2">{title}</Typography>
         
         {children}

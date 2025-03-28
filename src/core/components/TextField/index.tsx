@@ -17,7 +17,8 @@ export function Input<T extends FieldValues>({
   required = false,
   rules = {},
   id,
-  message
+  message,
+  maxLength
 }: InputProps<T>) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -80,6 +81,7 @@ export function Input<T extends FieldValues>({
           required={required}
           sx={{ 
             width: "100%", 
+            "& input": { textAlign: maxLength ? "center" : "start", bgcolor: "#ececec"},
             "& div": { bgcolor: "#ececec"}
           }}
           slotProps={{
@@ -94,6 +96,10 @@ export function Input<T extends FieldValues>({
                 </InputAdornment>
               ) : null,
               endAdornment: endAdornment,
+            },
+            htmlInput:{
+              maxLength: maxLength || undefined,
+              inputMode: maxLength ? "numeric" : "text",
             }
           }}
           margin="dense"
