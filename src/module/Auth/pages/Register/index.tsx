@@ -1,23 +1,24 @@
-import { Box, Button, Divider, FormHelperText, InputAdornment, Step, StepButton, Stepper, Typography } from '@mui/material'
+import { Box, Button, Divider, FormHelperText, InputAdornment, Step, StepButton, Stepper } from '@mui/material'
 import { LoginLayout } from '../../../../core'
 import './Register.css'
 import { useEffect, useState } from 'react'
-import { Input, SignatureModal } from '../../../../core/components';
-import EmailIcon from '../../../../core/icon/IconsRegister/EmailIcon.svg';
-import KeyIcon from '../../../../core/icon/IconsRegister/KeyIcon.svg';
-import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg';
-import UserIcon from '../../../../core/icon/IconsRegister/UserIcon.svg';
-import { useForm } from 'react-hook-form';
-import { RegisterFormData } from './Register.interface';
-
-
-const steps = [
-  "Datos Personales",
-  "Datos de Acceso",
-];
-
+import { Input, SignatureModal } from '../../../../core/components'
+import EmailIcon from '../../../../core/icon/IconsRegister/EmailIcon.svg'
+import KeyIcon from '../../../../core/icon/IconsRegister/KeyIcon.svg'
+import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg'
+import UserIcon from '../../../../core/icon/IconsRegister/UserIcon.svg'
+import { useForm } from 'react-hook-form'
+import { RegisterFormData } from './Register.interface'
+import { useTranslation } from 'react-i18next'
 
 export const RegisterPage = () => {
+
+  const {t} = useTranslation();
+
+  const steps = [
+    t("StringsAuth.steps.personalData"),
+    t("StringsAuth.steps.accessData")
+  ];
 
   const {
     handleSubmit,
@@ -39,6 +40,13 @@ export const RegisterPage = () => {
     }
   })
 
+  const name = watch("name")
+  const lastName = watch("lastName")
+  const productKey = watch("productKey")
+  const signature = watch("signature")
+  const email = watch("email")
+  const password = watch("password")
+  const confirmPassword = watch("confirmPassword")
   const [submitted, setSubmitted] = useState(false)
   const [open, setOpen] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
@@ -46,13 +54,19 @@ export const RegisterPage = () => {
 
 
   useEffect(() => {
+    if(password){
+      trigger("confirmPassword")
+    }
+  }, [password, trigger]);
+
+  useEffect(() => {
     if (submitted) {
       trigger(["name", "lastName", "productKey", "signature"]);
     }
-  }, [watch("name"), watch("lastName"), watch("productKey"), watch("signature")]);
+  }, [name, lastName, productKey, signature]);
 
   useEffect(() => {
-    register("signature", { required: "The signature is required" });
+    register("signature", { required: t("StringsAuth.required.signRequired") });
   }, [register]);
 
   const sign = (signature:string) => {
@@ -107,19 +121,19 @@ export const RegisterPage = () => {
   };
 
   return (
-    <LoginLayout title="Creación de Cuenta" className="backgroundLayout">
-      <Box component="form" sx={{display: "flex", paddingTop:"0"}} onSubmit={onSubmit}>
+    <LoginLayout title={t("StringsAuth.title.createAccount")} className="backgroundLayout">
+      <Box component="form" sx={{display: "flex", paddingTop:"0"}} onSubmit={onSubmit} noValidate>
         <Box className="formStep" id="registerStep2" sx={{display: activeStep === 0 ? "flex": "none"}}>
           <Input
             id="name"
             name="name"
-            label="Name"
+            label={t("StringsAuth.inputs.name")}
             icon={UserIcon}
             control={control}
             rules={{
-              required:"The Name is requiered",
+              required:t("StringsAuth.required.nameRequired"),
               validate: (value:string) => {
-                return (value.length<2) ? "The name must have at least 2 characters" : true
+                return (value.length<2) ? t("StringsAuth.validations.nameLength") : true
               }
             }}
           />
@@ -127,13 +141,13 @@ export const RegisterPage = () => {
           <Input
             id="lastName"
             name="lastName"
-            label="Last Name"
+            label={t("StringsAuth.inputs.lastName")}
             icon={UserIcon}
             control={control}
             rules={{
-              required:"The LastName is requiered",
+              required:t("StringsAuth.required.lastNameRequired"),
               validate: (value:string) => {
-                return (value.length<2) ? "The name must have at least 2 characters" : true
+                return (value.length<2) ? t("StringsAuth.validations.lastNameLength") : true
               }
             }}
             />
@@ -141,13 +155,13 @@ export const RegisterPage = () => {
           <Input
             id="key"
             name="productKey"
-            label="Product Key"
+            label={t("StringsAuth.inputs.productKey")}
             icon={KeyIcon}
             control={control}
             rules={{
-              required:"The product key is requiered",
+              required:t("StringsAuth.required.productKeyRequired"),
               validate: (value:string) => {
-                return (value.length<2) ? "Enter a valid product key" : true
+                return (value.length<2) ? t("StringsAuth.validations.productKeyLength") : true
               }
             }}
           />
@@ -178,11 +192,11 @@ export const RegisterPage = () => {
                   <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
                 </InputAdornment>
 
-                <img src={watch("signature")} style={{maxHeight: "6.3vh"}}/>
+                <img src={signature} style={{maxHeight: "6.3vh"}}/>
               </Box>
 
               <Button variant="contained" onClick={handleOpen} sx={{width:"30%"}}>
-                Firmar
+                {t("StringsAuth.buttons.sign")}
               </Button>
             </Box>
 
@@ -197,7 +211,14 @@ export const RegisterPage = () => {
             </FormHelperText>
           </Box>
           
-          <Button variant="contained" onClick={handleNext} className="stepperRegister"> Siguiente </Button>
+          <Button 
+            variant="contained" 
+            onClick={handleNext} 
+            className="stepperRegister"
+            disabled = {!name || !lastName || !productKey || ! signature}
+          > 
+            {t("StringsAuth.buttons.next")}
+          </Button>
         </Box>
 
         <Divider 
@@ -214,15 +235,15 @@ export const RegisterPage = () => {
           <Input
             id="email"
             name="email"
-            label="Email"
+            label={t("StringsAuth.inputs.email")}
             type="email"
             icon={EmailIcon}
             control={control}
             rules={{
-              required:"The email is requiered",
+              required:t("StringsAuth.required.emailObligatory"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Pleas, enter a valid email"
+                message:  t("StringsAuth.validations.emailValid")
               }
             }}
           />
@@ -230,27 +251,27 @@ export const RegisterPage = () => {
           <Input
             id="password"
             name="password"
-            label="Password"
+            label={t("StringsAuth.inputs.password")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required:"The password is requiered",
+              required:t("StringsAuth.required.passwordObligatory"),
               minLength: {
                 value: 8,
-                message: "The password must have at least 8 characters"
+                message: t("StringsAuth.validations.passwordMinLength")
               },
               maxLength: {
                 value: 127,
-                message: "The password only supports 127 characters"
+                message: t("StringsAuth.validations.passwordMaxLength")
               },
               validate: (value: string) => {   
                 if(!/\d/.test(value)){
-                  return "The password must have at least a number"
+                  return t("StringsAuth.validations.passwordNumber")
                 }
 
                 if(!/[\W_]/.test(value)){
-                  return "The password must have at least a simbol"
+                  return t("StringsAuth.validations.passwordSymbol")
                 }
               }
             }}
@@ -259,21 +280,27 @@ export const RegisterPage = () => {
           <Input
             id="confirmPassword"
             name="confirmPassword"
-            label="Confirm Password"
+            label={t("StringsAuth.inputs.confirmPassword")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required: "The confirmed password is requiered",
+              required:t("StringsAuth.required.confirmPasswordRequired"),
               validate: (value: string) => {
-                if(value !== watch("password")){
-                  return "The passwords are different"
+                if(value !== password){
+                  return t("StringsAuth.validations.confirmPassword")
                 }
               }
             }}
           />
 
-          <Button type="submit" variant="contained"> Registrarse </Button>
+          <Button 
+            type="submit" 
+            variant="contained"
+            disabled = {!name || !lastName || !productKey || !signature || ! email || !password || !confirmPassword}
+          > 
+            {t("StringsAuth.buttons.registerButton")}
+          </Button>
         </Box>
       </Box>
 

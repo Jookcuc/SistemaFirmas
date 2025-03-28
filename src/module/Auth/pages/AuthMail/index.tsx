@@ -2,9 +2,11 @@ import './AuthMail.css'
 import { Box, Button, Typography } from "@mui/material"
 import { LoginLayout, OtpTextField } from "../../../../core"
 import { ChangeEvent, ClipboardEvent, FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const AuthMailPage = () => {
-
+  const {t} = useTranslation();
+  
   const [values, setValues] = useState(Array(6).fill(""))
   const [error, setError] = useState(false)
 
@@ -54,14 +56,14 @@ export const AuthMailPage = () => {
   }
 
   return(    
-    <LoginLayout title="Verificar correo electronico" className="layoutAuthMail">
+    <LoginLayout title={t("StringsAuth.title.emailVerification")} className="layoutAuthMail">
       <Box className="authMailContainer" component="div">
         <Typography 
           component="h4"
           fontWeight={500}
           color="#808080"
         >
-          Ingresa el codigo enviado a tu correo
+          {t("StringsAuth.texts.verifyEmail")}
         </Typography>
 
         <Box component="form" onSubmit={onSubmit}>
@@ -80,7 +82,7 @@ export const AuthMailPage = () => {
           
           {error && (
             <Typography color="error">
-              Please fill all the code
+              {t("StringsAuth.required.confirmationCodeRequired")}
             </Typography>
           )}
 
@@ -90,7 +92,7 @@ export const AuthMailPage = () => {
             type="submit"
             fullWidth
           >
-            Verificar Codigo
+            {t("StringsAuth.buttons.verifyCode")}
           </Button>
         </Box>
       </Box>
