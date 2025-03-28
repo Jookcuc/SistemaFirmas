@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import { Container, Box, Typography, IconButton } from '@mui/material';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Header } from '../../../../core/components/header';
+import { ReTable } from '../../../../core/components/table';
+import './HistorialDocumentos.css';
+
+export const HistorialDocumentos: React.FC = () => {
+  const [documents] = useState([
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025'
+    }
+  ]);
+
+  const columns = [
+    { key: 'documentName', label: 'Nombre del Documento' },
+    { key: 'uploadDate', label: 'Fecha de Subida' },
+    { key: 'signatureDate', label: 'Fecha de Firma' }
+  ];
+
+  const actions = [
+    {
+      label: 'Descargar',
+      onClick: () => {
+        console.log('Descargar');
+      },
+      variant: 'primary'
+    },
+    {
+      label: 'Previsualizar',
+      onClick: () => {
+        console.log('Previsualizar');
+      },
+      variant: 'secondary'
+    }
+  ];
+
+  return (
+    <div className="document-history-page">
+      <Header />
+      <Container maxWidth="lg" className="page-content">
+        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
+          <Typography variant="h5" className="page-title">
+            Historial de Documentos
+          </Typography>
+          <IconButton className="filter-icon">
+            <FilterListIcon />
+          </IconButton>
+        </Box>
+        <ReTable 
+          columns={columns}
+          rows={documents}
+          actions={actions}
+          title="Historial de Documentos"
+        />
+      </Container>
+    </div>
+  );
+};

@@ -1,0 +1,21 @@
+.document-history-page {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  .page-content {
+    padding-top: 24px;
+  }
+  
+  .page-title {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  .filter-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .filter-icon:hover {
+    color: rgba(0, 0, 0, 0.87);
+  }
