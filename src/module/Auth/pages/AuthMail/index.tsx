@@ -1,38 +1,98 @@
 import './AuthMail.css'
-import { Box, Button } from "@mui/material"
-import { Input, LoginLayout } from "../../../../core"
+import { Box, Button, Typography } from "@mui/material"
+import { LoginLayout, OtpTextField } from "../../../../core"
+import { ChangeEvent, ClipboardEvent, FormEvent, useState } from 'react'
 
 export const AuthMailPage = () => {
+
+  const [values, setValues] = useState(Array(6).fill(""))
+  const [error, setError] = useState(false)
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {id, value} = e.target
+    const newValue = value.replace(/\D/g, "");
+
+    const index = Number(id.replace("verificationCode", ""))
+
+    const newValues = [...values];
+    newValues[index] = newValue;
+    setValues(newValues);
+
+    if(newValue && index<5){
+      const nextInput = document.getElementById(`verificationCode${index + 1}`)
+      if (nextInput) {
+        (nextInput as HTMLInputElement).focus();
+      }
+    }
+  }
+
+  const onPaste = (e: ClipboardEvent) => {
+    e.preventDefault()
+    const pastedText = e.clipboardData.getData("text").replace(/\D/g, "")
+    const target = e.target as HTMLInputElement
+    const id = target.id
+    const startIndex = Number(id.replace("verificationCode", ""))
+    const newValues = [...values]
+
+    pastedText.slice(0, 6-startIndex).split("").forEach((char, i) => {
+      newValues[startIndex+i] = char
+    })
+
+    setValues(newValues)
+  }
+
+  const onSubmit = (e: FormEvent) =>{
+    e.preventDefault()
+    if(values.every((char) => char !== "")){
+      setError(false)
+      console.log(values.join(""))
+    }
+    else{
+      setError(true)
+      console.log("AAAAAAAAA")
+    }
+  }
+
   return(    
-    <LoginLayout title="Verificar correo electronico">
+    <LoginLayout title="Verificar correo electronico" className="layoutAuthMail">
       <Box className="authMailContainer" component="div">
-        <Box 
+        <Typography 
           component="h4"
-          sx={{
-            color:"#808080",
-            fontWeight:"500",
-          }}
+          fontWeight={500}
+          color="#808080"
         >
           Ingresa el codigo enviado a tu correo
-        </Box>
-        <Box 
-          component="form"
-          className="authCodeFieldsContainer"
-        >
-          <Input></Input>
-          <Input></Input>
-          <Input></Input>
-          <Input></Input>
-          <Input></Input>
-          <Input></Input>
-        </Box>
+        </Typography>
 
-        <Button 
-          variant="contained"
-          className="authCodeButton"
-        >
-          Verificar Codigo
-        </Button>
+        <Box component="form" onSubmit={onSubmit}>
+          <Box className="authCodeFieldsContainer">
+            {values.map((val, index) => (
+              <OtpTextField
+                key={index}
+                id={`verificationCode${index}`}
+                className="verificationCodeInput"
+                value={val}
+                onChange={onChange}
+                onPaste={onPaste}
+              />
+            ))}
+          </Box>
+          
+          {error && (
+            <Typography color="error">
+              Please fill all the code
+            </Typography>
+          )}
+
+          <Button 
+            variant="contained"
+            className="authCodeButton"
+            type="submit"
+            fullWidth
+          >
+            Verificar Codigo
+          </Button>
+        </Box>
       </Box>
     </LoginLayout>
   )

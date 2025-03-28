@@ -78,18 +78,23 @@ export function Input<T extends FieldValues>({
           error={!!error}
           helperText={error?.message || message}
           required={required}
-          sx={{ bgcolor: "#ececec", width: "100%" }}
-          InputProps={{
-            startAdornment: icon ? (
-              <InputAdornment position="start">
-                <img 
-                  src={icon} 
-                  alt="icon" 
-                  style={{ width: 20, height: 20 }} 
-                />
-              </InputAdornment>
-            ) : null,
-            endAdornment: endAdornment
+          sx={{ 
+            width: "100%", 
+            "& div": { bgcolor: "#ececec"}
+          }}
+          slotProps={{
+            input:{
+              startAdornment: icon ? (
+                <InputAdornment position="start">
+                  <img 
+                    src={icon} 
+                    alt="icon" 
+                    style={{ width: 20, height: 20 }} 
+                  />
+                </InputAdornment>
+              ) : null,
+              endAdornment: endAdornment,
+            }
           }}
           margin="dense"
         />

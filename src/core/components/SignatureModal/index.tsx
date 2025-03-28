@@ -5,14 +5,17 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CloudAdd from '../../icon/CloudAdd/cloud-add.svg'
 import ReactSignatureCanvas from 'react-signature-canvas';
 
-export const SignatureModal:FC<SignatureModalProps> = function({open, handleClose, setFirm}) {
+export const SignatureModal:FC<SignatureModalProps> =({open, handleClose, setFirm}) => {
   
   const sigCanvas = useRef<ReactSignatureCanvas>(null)
 
 
   const handleSaveSignature = () => {
+    var firmData = ""
     if(sigCanvas.current){
-      const firmData = sigCanvas.current.toDataURL('image/svg+xml')
+      if(!sigCanvas.current.isEmpty()){
+        firmData = sigCanvas.current.toDataURL('image/svg+xml')
+      }
       setFirm(firmData)
       handleClose()
     }

@@ -1,12 +1,14 @@
-import { Box, Button, Divider, InputAdornment, Step, StepButton, Stepper } from '@mui/material'
+import { Box, Button, Divider, FormHelperText, InputAdornment, Step, StepButton, Stepper, Typography } from '@mui/material'
 import { LoginLayout } from '../../../../core'
 import './Register.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Input, SignatureModal } from '../../../../core/components';
 import EmailIcon from '../../../../core/icon/IconsRegister/EmailIcon.svg';
 import KeyIcon from '../../../../core/icon/IconsRegister/KeyIcon.svg';
 import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg';
 import UserIcon from '../../../../core/icon/IconsRegister/UserIcon.svg';
+import { useForm } from 'react-hook-form';
+import { RegisterFormData } from './Register.interface';
 
 
 const steps = [
@@ -17,39 +19,90 @@ const steps = [
 
 export const RegisterPage = () => {
 
-  const [name, setName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [key, setKey] = useState("")
-  const [firm, setFirm] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const {
+    handleSubmit,
+    watch,
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm<RegisterFormData>({
+    defaultValues: {
+      name:"",
+      lastName:"",
+      productKey:"",
+      firm:"",
+      email:"",
+      password:"",
+      confirmPassword:""
+    }
+  })
 
-  const [open, setOpen] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [completed, setCompleted] = useState< {[k: number]: boolean} >({});
+  const [firm, setFirm] = useState("")
+  const [firmError, setFirmError] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
+  const [completed, setCompleted] = useState< {[k: number]: boolean} >({})
+
+  useEffect(() => {
+    if(submitted){
+      setFirmError(!firm)
+    }
+  }, [firm, submitted])
+
+  useEffect(() => {
+    if(submitted){
+      trigger([
+        "name", "lastName", "productKey", "email", "password", "confirmPassword"
+      ])
+    }
+  }, [
+    watch("name"), watch("lastName"), watch("productKey"), 
+    watch("email"), watch("password"), watch("confirmPassword")
+  ])
+
+  const onSubmit = handleSubmit( (data) => {
+    setSubmitted(true)
+    if (!firm) {
+      setFirmError(true)
+      return
+    }
+    console.log("Formulario enviado:", data)
+  })
 
   const handleOpen = () => {
     setOpen(true);
   }
 
-  const handleClose = () => () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false)
+  } 
 
-  const handleNext = () => {
-    if(name !== "" && lastName !== "" && key !== "" && firm !== ""){
-      setCompleted({
-        [0]: true,
-        [1]: false
-      })
-      setActiveStep(1)
-    }
-    else{
+  const handleNext = async () => {
+    const isValid = await trigger(["name", "lastName", "productKey"])
+    setSubmitted(true)
 
+    if (!isValid || !firm) {
+      setFirmError(!firm);
+      return
     }
+    
+    setCompleted({
+      [0]: true,
+      [1]: false,
+    })
+
+    setActiveStep(1)
   }
   const handleStep = (step: number) => {
-    handleComplete(step)
-    setActiveStep(step)
+
+    if(step === 1){
+      handleNext()
+    }
+    else{
+      handleComplete(step)
+      setActiveStep(step)
+    }
   }
 
   const handleComplete = (step: number) => {
@@ -60,77 +113,95 @@ export const RegisterPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
-    console.log('Name:', name);
-    console.log('Last Name:', lastName);
-    console.log('Product Key:', key);
-    console.log('Firm:', firm);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-  };
-
   return (
-    <LoginLayout title="Creación de Cuenta">
-      <Box component="form" sx={{display: "flex", paddingTop:"0"}} onSubmit={handleSubmit}>
+    <LoginLayout title="Creación de Cuenta" className="backgroundLayout">
+      <Box component="form" sx={{display: "flex", paddingTop:"0"}} onSubmit={onSubmit}>
         <Box className="formStep" id="registerStep2" sx={{display: activeStep === 0 ? "flex": "none"}}>
           
           <Input
             id="name"
+            name="name"
             label="Name"
-            type="text"
             icon={UserIcon}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
+            control={control}
+            rules={{
+              required:"The Name is requiered",
+              validate: (value:string) => {
+                return (value.length<2) ? "The name must have at least 2 characters" : true
+              }
+            }}
           />
           
           <Input
             id="lastName"
+            name="lastName"
             label="Last Name"
-            type="text"
             icon={UserIcon}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
+            control={control}
+            rules={{
+              required:"The LastName is requiered",
+              validate: (value:string) => {
+                return (value.length<2) ? "The name must have at least 2 characters" : true
+              }
+            }}
+            />
 
           <Input
             id="key"
+            name="productKey"
             label="Product Key"
-            type="text"
             icon={KeyIcon}
-            value={key}
-            onChange={(e) => setKey(e.target.value)}
-            required
+            control={control}
+            rules={{
+              required:"The product key is requiered",
+              validate: (value:string) => {
+                return (value.length<2) ? "Enter a valid product key" : true
+              }
+            }}
           />
 
-          <Box className="firmBox">
-            <Box 
-              sx={{
-                display:"flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                gap: "1rem",
-                width: "70%", 
-                paddingX: "0.7rem",
-                border:"solid 1px #b5b5b5",
-                borderRadius:"8px",
-                backgroundColor:"#ececec"
-              }}
-            >
-              <InputAdornment position="start">
-                <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
-              </InputAdornment>
+          <Box sx={{
+            display:"flex", 
+            flexDirection:"column", 
+            gap:"0.17rem"
+          }}>
+            <Box className="firmBox">
+              <Box
+                sx={{
+                  display:"flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: "1rem",
+                  width: "70%", 
+                  paddingX: "0.7rem",
+                  border:"solid 1px #b5b5b5",
+                  borderRadius:"8px",
+                  borderColor: firmError ? "#c23f38" : "#b5b5b5",
+                  backgroundColor:"#ececec",
+                  paddingBottom:0
+                }}
+              > 
+                <InputAdornment position="start">
+                  <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
+                </InputAdornment>
 
-              <img src={firm} style={{maxHeight: "6vh"}}/>
+                <img src={firm} style={{maxHeight: "5vh"}}/>
+              </Box>
+
+              <Button variant="contained" onClick={handleOpen} sx={{width:"30%"}}>
+                Firmar
+              </Button>
             </Box>
-
-            <Button variant="contained" onClick={handleOpen} sx={{width:"30%"}}>
-              Firmar
-            </Button>
+            {firmError && (
+            <FormHelperText error sx={{
+              marginTop:0,
+              marginLeft: "14px"
+            }}>
+              The firm is necesary
+            </FormHelperText>
+          )}
           </Box>
+          
           <Button variant="contained" onClick={handleNext} className="stepperRegister"> Siguiente </Button>
         </Box>
 
@@ -147,32 +218,64 @@ export const RegisterPage = () => {
         <Box className="formStep inactive" id="registerStep2" sx={{display: activeStep === 1 ? "flex": "none"}}>
           <Input
             id="email"
+            name="email"
             label="Email"
             type="email"
             icon={EmailIcon}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            control={control}
+            rules={{
+              required:"The email is requiered",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Pleas, enter a valid email"
+              }
+            }}
           />
 
           <Input
             id="password"
+            name="password"
             label="Password"
             type="password"
             icon={KeyIcon}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            control={control}
+            rules={{
+              required:"The password is requiered",
+              minLength: {
+                value: 8,
+                message: "The password must have at least 8 characters"
+              },
+              maxLength: {
+                value: 127,
+                message: "The password only supports 127 characters"
+              },
+              validate: (value: string) => {   
+                if(!/\d/.test(value)){
+                  return "The password must have at least a number"
+                }
+
+                if(!/[\W_]/.test(value)){
+                  return "The password must have at least a simbol"
+                }
+              }
+            }}
           />
 
           <Input
             id="confirmPassword"
+            name="confirmPassword"
             label="Confirm Password"
             type="password"
             icon={KeyIcon}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            control={control}
+            rules={{
+              required: "The confirmed password is requiered",
+              validate: (value: string) => {
+                if(value !== watch("password")){
+                  return "The passwords are different"
+                }
+              }
+            }}
           />
 
           <Button type="submit" variant="contained"> Registrarse </Button>
@@ -189,12 +292,8 @@ export const RegisterPage = () => {
         ))}
       </Stepper>
 
-      <SignatureModal open={open} handleClose={handleClose()} setFirm={setFirm}/>
+      <SignatureModal open={open} handleClose={handleClose} setFirm={setFirm}/>
       
     </LoginLayout>
   )
 }
-
-
-
-

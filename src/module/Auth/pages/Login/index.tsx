@@ -45,12 +45,10 @@ export const LoginPage: React.FC = () => {
                   className="textField"
                   id="email"
                   label="Email"
-                  variant="outlined"
                   type="email"
                   icon={mailIcon}
                   control={control}
                   name="email"
-                  required
                   rules={{
                     required: "El correo electrónico es obligatorio",
                     pattern: {
@@ -66,12 +64,10 @@ export const LoginPage: React.FC = () => {
                   className="textField"
                   id="password"
                   label="Password"
-                  variant="outlined"
                   type="password"
                   icon={passWodIcon}
                   control={control}
                   name="password"
-                  required
                   rules={{
                     required: "La contraseña es obligatoria"
                   }}
