@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Box, Typography, IconButton } from '@mui/material';
+import { Container, Box, Typography, IconButton, ButtonBaseActions } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Header } from '../../../../core/components/header';
 import { ReTable } from '../../../../core/components/table';
 import './HistorialDocumentos.css';
+import { ActionDefinition } from '../../../../core/interfaces';
 
 export const HistorialDocumentos: React.FC = () => {
   const [documents] = useState([
@@ -40,22 +41,22 @@ export const HistorialDocumentos: React.FC = () => {
     { key: 'signatureDate', label: 'Fecha de Firma' }
   ];
 
-  const actions = [
+  const actions: ActionDefinition[] = [
     {
       label: 'Descargar',
-      onClick: () => {
-        console.log('Descargar');
+      onClick: (row: any) => {
+        console.log('Descargar', row);
       },
-      variant: 'primary'
+      variant: 'contained'
     },
     {
       label: 'Previsualizar',
-      onClick: () => {
-        console.log('Previsualizar');
+      onClick: (row: any) => {
+        console.log('Previsualizar', row);
       },
-      variant: 'secondary'
+      variant: 'contained'
     }
-  ];
+  ];  
 
   return (
     <div className="document-history-page">
@@ -73,7 +74,6 @@ export const HistorialDocumentos: React.FC = () => {
           columns={columns}
           rows={documents}
           actions={actions}
-          title="Historial de Documentos"
         />
       </Container>
     </div>

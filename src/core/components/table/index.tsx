@@ -8,28 +8,12 @@ import {
   TableRow, 
   Paper,
   Box,
-  Typography
+  Typography,
+  Button
 } from '@mui/material';
 import './table.css';
+import { GenericTableProps} from '../../interfaces';
 
-interface ColumnDefinition {
-  key: string;
-  label: string;
-  width?: string;
-}
-
-interface ActionDefinition {
-  label: string;
-  onClick: (row: any) => void;
-  variant?: 'primary' | 'secondary';
-}
-
-interface GenericTableProps {
-  columns: ColumnDefinition[];
-  rows: any[];
-  actions?: ActionDefinition[];
-  title?: string;
-}
 
 export const ReTable: React.FC<GenericTableProps> = ({
   columns,
@@ -72,13 +56,13 @@ export const ReTable: React.FC<GenericTableProps> = ({
                 <TableCell>
                   <Box className="action-buttons">
                     {actions.map((action, actionIndex) => (
-                      <button
+                      <Button
                         key={actionIndex}
-                        className={`action-btn ${action.variant || 'primary'}`}
+                        variant={action.variant || 'contained'}
                         onClick={() => action.onClick(row)}
                       >
                         {action.label}
-                      </button>
+                      </Button>
                     ))}
                   </Box>
                 </TableCell>

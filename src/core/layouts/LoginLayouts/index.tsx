@@ -1,19 +1,16 @@
 import './LoginLayout.css';
+import {LoginLayoutProps} from './LoginLayout.interface';
 import Logo from '../../../assets/assetsLogin/JookSimpleLogo.svg'
 import { Box, Typography} from '@mui/material';
-import { ReactNode, FC } from 'react';
-
-interface Props {
-  children: ReactNode;
-  title?: string;
-}
+import { FC } from 'react';
 
 
-export const LoginLayout: FC<Props> = function({ children, title = "TextoEjemplo" }) {
+
+export const LoginLayout: FC<LoginLayoutProps> = function({ children, title = "TextoEjemplo", className}) {
   
   return (
     <Box className="principalContainerLayoutLogin">
-      <Box className="containerChildrens"> 
+      <Box className={className ? "containerChildrens " + className : "containerChildrens"}> 
         <Typography variant="h2" component="h2">{title}</Typography>
         
         {children}
