@@ -31,6 +31,60 @@ export const HistorialDocumentos: React.FC = () => {
       uploadDate: '13 de marzo de 2025',
       signatureDate: '13 de marzo de 2025',
       downloadUrl: '/api/documents/download/4'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: 'https://drive.google.com/uc?export=download&id=18eWDey9nZc2RTDNtQS-3TGuowVGTTHq4'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/2'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/3'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/4'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/4'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: 'https://drive.google.com/uc?export=download&id=18eWDey9nZc2RTDNtQS-3TGuowVGTTHq4'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/2'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/3'
+    },
+    {
+      documentName: 'Documento06.pdf',
+      uploadDate: '13 de marzo de 2025',
+      signatureDate: '13 de marzo de 2025',
+      downloadUrl: '/api/documents/download/4'
     }
   ]);
 
@@ -56,7 +110,7 @@ export const HistorialDocumentos: React.FC = () => {
   ];  
 
   return (
-    <div className="document-history-page">
+    <Box className="document-history-page">
       <Header />
       <Container maxWidth="lg" className="page-content">
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
@@ -73,6 +127,6 @@ export const HistorialDocumentos: React.FC = () => {
           actions={actions}
         />
       </Container>
-    </div>
+    </Box>
   );
 };
