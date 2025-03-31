@@ -113,7 +113,7 @@ export const HistorialDocumentos: React.FC = () => {
     <Box className="document-history-page">
       <Header />
       <Container maxWidth="lg" className="page-content">
-        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
+        <Box className="title-box" mb={2}>
           <Typography variant="h5" className="page-title">
             Historial de Documentos
           </Typography>

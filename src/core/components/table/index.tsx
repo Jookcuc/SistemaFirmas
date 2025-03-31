@@ -13,7 +13,7 @@ export const ReTable: React.FC<GenericTableProps> = ({
   title
 }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage] = useState(8);
+  const [rowsPerPage] = useState(10);
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
@@ -66,7 +66,7 @@ export const ReTable: React.FC<GenericTableProps> = ({
       </Table>
       <TablePagination
         className='table-pag'
-        rowsPerPageOptions={[8]}
+        rowsPerPageOptions={[10]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
