@@ -1,19 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper,
-  Box,
-  Typography,
-  Button
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
+  Paper, Box, Typography, Button, TablePagination 
 } from '@mui/material';
 import './table.css';
-import { GenericTableProps} from '../../interfaces';
-
+import { GenericTableProps } from '../../interfaces';
 
 export const ReTable: React.FC<GenericTableProps> = ({
   columns,
@@ -21,6 +12,13 @@ export const ReTable: React.FC<GenericTableProps> = ({
   actions = [],
   title
 }) => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage] = useState(5);
+
+  const handleChangePage = (_event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
   return (
     <TableContainer component={Paper} className="generic-table-container">
       {title && (
@@ -34,23 +32,18 @@ export const ReTable: React.FC<GenericTableProps> = ({
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell 
-                key={column.key} 
-                style={{ width: column.width }}
-              >
+              <TableCell key={column.key} style={{ width: column.width }}>
                 {column.label}
               </TableCell>
             ))}
-            {actions.length > 0 && <TableCell>Accion</TableCell>}
+            {actions.length > 0 && <TableCell>Acción</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, rowIndex) => (
+          {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               {columns.map((column) => (
-                <TableCell key={column.key}>
-                  {row[column.key]}
-                </TableCell>
+                <TableCell key={column.key}>{row[column.key]}</TableCell>
               ))}
               {actions.length > 0 && (
                 <TableCell>
@@ -71,6 +64,14 @@ export const ReTable: React.FC<GenericTableProps> = ({
           ))}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[5]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+      />
     </TableContainer>
   );
 };

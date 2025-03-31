@@ -1,0 +1,50 @@
+.generic-table-container {
+  width: 100%;
+  margin-top: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.generic-table {
+  min-width: 650px;
+}
+
+.generic-table thead {
+  background-color: #f5f5f5;
+}
+
+.generic-table th {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Estilos para los botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons .MuiButton-root {
+  font-size: 0.65rem;
+  min-width: 5.2rem; 
+  min-height: 2rem; 
+  padding: 4px 8px;
+  border: 1px solid #B4B4B4;
+  border-radius: 3px;
+  text-transform: none;
+  box-shadow: none;
+}
+
+.action-buttons .MuiButton-contained {
+  background-color: #EBEBEB;
+  color: rgb(27, 27, 27);
+}
+
+.action-buttons .MuiButton-root:hover {
+  background-color: #b4b4b4;
+  border-color: #8f8f8f;
+  box-shadow: none;
+}
+
+.action-buttons .MuiButton-contained:hover {
+  background-color: #b4b4b4;
+}
