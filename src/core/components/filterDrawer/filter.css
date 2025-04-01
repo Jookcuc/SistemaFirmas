@@ -1,0 +1,49 @@
+.filter-drawer-paper {
+    width: 320px;
+    padding: 24px;
+  }
+  
+  .filter-drawer-container {
+    width: 100%;
+  }
+  
+  .filter-drawer-title {
+    margin-bottom: 16px;
+  }
+  
+  .filter-drawer-subtitle {
+    margin-bottom: 8px;
+  }
+  
+  .filter-field-container {
+    margin-bottom: 16px;
+  }
+  
+  .filter-range-container {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .filter-range-title {
+    margin-bottom: 16px;
+  }
+  
+  .filter-range-field {
+    margin-bottom: 16px;
+  }
+  
+  .filter-range-field-label {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  
+  .filter-button .MuiButton-root {
+    min-width: 80px;
+    background-color: #B7B7B7 !important;
+  }
