@@ -1,6 +1,9 @@
 .document-history-page {
-    background-color: #f5f5f5;
-    min-height: auto;
+  background-color: #f5f5f5;
+  min-height: 100vh; /* O usa height: 100vh si no tienes contenido dinámico */
+  width: 100%;
+  display: flex; /* Opcional: si quieres centrar elementos hijos */
+  flex-direction: column;
   }
   
   .page-content {
