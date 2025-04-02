@@ -1,14 +1,15 @@
-import { Control, FieldValues, Path } from 'react-hook-form';
+import { Control, FieldValues, Path, RegisterOptions } from 'react-hook-form';
 
 export interface InputProps<T extends FieldValues> {
   className?: string;
   name: Path<T>;
-  label?: string;
+  label: string;
   control: Control<T>;
   type?: string;
   icon?: string;
-  variant?: "standard" | "outlined" | "filled";
+  variant?: "outlined" | "standard" | "filled";
   required?: boolean;
-  rules?: object;
+  rules?: RegisterOptions;
   id?: string;
+  disabled?: boolean;
 }
