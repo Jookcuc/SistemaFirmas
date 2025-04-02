@@ -1,32 +1,31 @@
 export const StringsAuth = {
+  "StringsAuth": {
+    "title": {
+      "welcome": "Bienvenido"
+    },
+    "buttons": {
+      "login": "Iniciar Sesión",
+      "register": "Regístrate"
+    },
+    "inputs": {
+      "email": "Correo",
+      "password": "Contraseña"
+    },
+    "checkboxes": {
+      "rememberMe": "Recuérdame"
+    },
+    "links": {
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes una cuenta?"
+    },
+    "required": {
+      "passwordObligatory": "La contraseña es obligatoria",
+      "emailObligatory": "El correo electrónico es obligatorio",
+      "correctEmail": "Por favor, introduce un correo electrónico válido",
 
-      "StringsAuth": {
-        "title": {
-          "welcome": "Bienvenido"
-        },
-        "buttons": {
-          "login": "Iniciar Sesión",
-          "register": "Regístrate"
-        },
-        "inputs": {
-          "email": "Correo",
-          "password": "Contraseña"
-        },
-        "checkboxes": {
-          "rememberMe": "Recuérdame"
-        },
-        "links": {
-          "forgotPassword": "¿Olvidaste tu contraseña?",
-          "noAccount": "¿No tienes una cuenta?"
-        },
-        "required":{
-          "passwordObligatory":"La contraseña es obligatoria",
-          "emailObligatory":"El correo electrónico es obligatorio",
-          "correctEmail":"Por favor, introduce un correo electrónico válido",
 
-
-        }
-      }
+    }
+  }
   ,
   en: {
     translation: {
@@ -50,10 +49,10 @@ export const StringsAuth = {
           "noAccount": "Don't have an account?"
         },
 
-        "required":{
-          "passwordObligatory":"Password is required",
-          "emailObligatory":"Email is required",
-          "correctEmail":"Please enter a valid email address",
+        "required": {
+          "passwordObligatory": "Password is required",
+          "emailObligatory": "Email is required",
+          "correctEmail": "Please enter a valid email address",
 
 
         }

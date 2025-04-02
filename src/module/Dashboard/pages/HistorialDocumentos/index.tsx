@@ -17,6 +17,8 @@ const initialDocuments = [
   },
 ];
 
+//prueba
+
 export const HistorialDocumentos: React.FC = () => {
   const { t } = useTranslation();
   const [filteredDocuments, setFilteredDocuments] = useState(initialDocuments);
