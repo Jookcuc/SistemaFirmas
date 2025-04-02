@@ -1,6 +1,5 @@
 export const StringsAuth = {
-  es: {
-    translation: {
+
       "StringsAuth": {
         "title": {
           "welcome": "Bienvenido"
@@ -28,8 +27,7 @@ export const StringsAuth = {
 
         }
       }
-    }
-  },
+  ,
   en: {
     translation: {
       "StringsAuth": {
