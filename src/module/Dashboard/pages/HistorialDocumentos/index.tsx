@@ -68,7 +68,7 @@ export const HistorialDocumentos: React.FC = () => {
   }), [t]);
 
   const documentFilterFunctions = useMemo(() => ({
-    documentName: (doc: any, filterValue: string) => 
+    documentName: (doc: any, filterValue: string) =>
       doc.documentName.toLowerCase().includes(filterValue.toLowerCase()),
     signatureDate: (doc: any, filterValue: string) =>
       doc.signatureDate.includes(filterValue),
@@ -80,22 +80,22 @@ export const HistorialDocumentos: React.FC = () => {
       <Container maxWidth="lg" className="page-content">
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h5" className="page-title">
-            {t('StringHistorialDocumentos.StringsHistorial.title.pageTitle')}
+            {t('StringsHistorial.title.pageTitle')}
           </Typography>
-          <IconButton 
-            className="filter-icon" 
+          <IconButton
+            className="filter-icon"
             onClick={() => setIsFilterDrawerOpen(true)}
             aria-label={t('StringsHistorial.buttons.filter')}
           >
             <FilterListIcon />
           </IconButton>
         </Box>
-        <ReTable 
+        <ReTable
           columns={columns}
           rows={filteredDocuments}
           actions={actions}
         />
-        
+
         <FilterDrawer
           open={isFilterDrawerOpen}
           onClose={() => setIsFilterDrawerOpen(false)}
