@@ -1,0 +1,129 @@
+.filter-drawer-paper {
+  width: 35%;
+  padding: 24px;
+  background-color: #f3f3f3 !important;
+}
+
+.filter-drawer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.filter-field-container {
+  margin-bottom: 16px;
+}
+
+.filter-range-container {
+  margin-top: 34%;
+  margin-bottom: 16px;
+}
+
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto; 
+  padding-top: 24px;
+}
+
+.filter-actions .filter-button-search, .filter-actions .filter-button-clear  {
+  background-color: #EBEBEB;
+  min-width: 0.5rem;
+  color: #000000;
+  border: 1px solid #b4b4b4;
+  border-radius: 3px;
+  font-size: 1rem;
+  box-shadow: none;
+}
+
+.filter-actions .filter-button-clear{
+  margin-right: 10px;
+}
+
+.filter-actions .filter-button-search:hover, .filter-actions .filter-button-clear:hover {
+  background-color: #aaaaaa ;
+  border-radius: 1;
+  border-color: #575757;
+  box-shadow: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .filter-drawer-paper {
+    width: 40%; 
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .filter-drawer-paper {
+    width: 50%; 
+    padding: 20px;
+  }
+  
+  .filter-range-container {
+    margin-top: 25%; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter-drawer-paper {
+    width: 70%; 
+    padding: 16px;
+  }
+  
+  
+  .filter-range-container {
+    margin-top: 20%;
+  }
+  
+  .filter-actions .filter-button-search, .filter-actions .filter-button-clear {
+    min-width: 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .filter-drawer-paper {
+    width: 85%; 
+    padding: 12px;
+  }
+  
+  .filter-field-container {
+    margin-bottom: 12px;
+  }
+  
+  .filter-range-container {
+    margin-top: 15%;
+    margin-bottom: 12px;
+  }
+  
+  .filter-range-field {
+    margin-bottom: 12px;
+  }
+  
+  .filter-head {
+    margin-bottom: 16px;
+  }
+  
+  .filter-actions {
+    padding-top: 16px;
+  }
+  
+  .filter-actions .filter-button-search, .filter-actions .filter-button-clear {
+    min-width: 0.35rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .filter-drawer-paper {
+    width: 95%; 
+    padding: 10px;
+  }
+  
+  .filter-range-container {
+    margin-top: 10%;
+  }
+}

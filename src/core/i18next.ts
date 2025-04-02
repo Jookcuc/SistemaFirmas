@@ -1,11 +1,14 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
-import { StringsAuth } from "./strings/";
+import es from "./lang/es";
+
 
 i18next
   .use(initReactI18next)
   .init({
-    resources: StringsAuth,
+    resources: {
+      es
+    },
     lng: "es", // Idioma predeterminado
     fallbackLng: "en", // Idioma de respaldo
     interpolation: {

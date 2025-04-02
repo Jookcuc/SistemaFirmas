@@ -1,0 +1,107 @@
+/* Contenedor principal */
+.generic-table-container {
+  width: 100%;
+  margin-top: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 36rem; 
+  display: flex;
+  flex-direction: column;
+  background-color: white; 
+  overflow-wrap: hidden;
+}
+
+
+/* Tabla */
+.generic-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  flex-grow: 1; 
+}
+
+/* Cabecera */
+.generic-table thead {
+  background-color: #f5f5f5;
+}
+
+.generic-table th {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.87);
+  padding: 12px 16px;
+  text-align: left;
+}
+
+/* Filas */
+.generic-table tbody {
+  display: block;
+  height: calc(100% - 56px); 
+  overflow-y: auto; 
+}
+
+.generic-table tr {
+  height: 48px; 
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Celdas */
+.generic-table td {
+  padding: 5px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  border-bottom: 1px solid #e0e0e0; 
+}
+
+/* Paginador (siempre abajo) */
+.tablepag {
+  margin-top: auto;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 0;
+  background-color: white; 
+}
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons .MuiButton-root {
+  font-size: 0.8rem;
+  min-width: 5.2rem;
+  min-height: 2rem;
+  padding: 4px 8px;
+  border: 1px solid #b4b4b4;
+  border-radius: 3px;
+  text-transform: none;
+  box-shadow: none;
+}
+
+.action-buttons .MuiButton-contained {
+  background-color: #ebebeb;
+  color: rgb(27, 27, 27);
+  border: 1px solid #8b8b8b;
+  border-radius: 3px;
+  box-shadow: none
+}
+
+.action-buttons .MuiButton-root:hover {
+  background-color: #b4b4b4;
+  border: 1px solid #414141;
+  border-radius: 3px;
+  box-shadow: none
+}
+
+@media screen and (max-width: 768px) {
+  .generic-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+  }
+  
+  .generic-table {
+    min-width: 900px; 
+  }
+}
