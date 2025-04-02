@@ -112,7 +112,7 @@
   }
   
   .filter-actions .filter-button-search, .filter-actions .filter-button-clear {
-    min-width: 0.35;
+    min-width: 0.35rem;
     font-size: 0.8rem;
   }
 }
