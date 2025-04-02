@@ -1,3 +1,5 @@
+
+
 export interface ColumnDefinition {
     key: string;
     label: string;
@@ -17,4 +19,6 @@ export interface GenericTableProps {
     actions?: ActionDefinition[];
     title?: string;
   }
+
+ 
   

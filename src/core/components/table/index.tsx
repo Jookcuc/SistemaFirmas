@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
   Paper, Box, Typography, Button, TablePagination 
@@ -6,12 +6,12 @@ import {
 import './table.css';
 import { GenericTableProps } from '../../interfaces';
 
-export const ReTable: React.FC<GenericTableProps> = ({
+export const ReTable = ({
   columns,
   rows,
   actions = [],
   title
-}) => {
+}: GenericTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage] = useState(10);
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Container, Box, Typography, IconButton } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Header } from '../../../../core/components/header';
@@ -7,6 +7,7 @@ import { FilterDrawer } from '../../../../core/components/filterDrawer';
 import './HistorialDocumentos.css';
 import { ActionDefinition } from '../../../../core/interfaces';
 import { useTranslation } from 'react-i18next';
+import { Document } from '../../../../core/interfaces';
 
 const initialDocuments = [
   {
@@ -17,9 +18,9 @@ const initialDocuments = [
   },
 ];
 
-export const HistorialDocumentos: React.FC = () => {
+export const HistorialDocumentos = () => {
   const { t } = useTranslation();
-  const [filteredDocuments, setFilteredDocuments] = useState(initialDocuments);
+  const [filteredDocuments, setFilteredDocuments] = useState(() => initialDocuments);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
 
   const columns = useMemo(() => [
@@ -31,12 +32,12 @@ export const HistorialDocumentos: React.FC = () => {
   const actions: ActionDefinition[] = useMemo(() => [
     {
       label: t('StringsHistorial.buttons.download'),
-      onClick: (row: any) => window.location.href = row.downloadUrl,
+      onClick: (row: Document) => window.location.href = row.downloadUrl,
       variant: 'contained'
     },
     {
       label: t('StringsHistorial.buttons.preview'),
-      onClick: (row: any) => {
+      onClick: (row: Document) => {
         console.log('Previsualizar', row);
       },
       variant: 'contained'
@@ -76,10 +77,10 @@ export const HistorialDocumentos: React.FC = () => {
 
   return (
     <Box className="document-history-page">
-      <Header />
-      <Container maxWidth="lg" className="page-content">
-        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
-          <Typography variant="h5" className="page-title">
+      <Header/>
+      <Container>
+        <Box className="document-history-header">
+          <Typography variant="h5">
             {t('StringsHistorial.title.pageTitle')}
           </Typography>
           <IconButton

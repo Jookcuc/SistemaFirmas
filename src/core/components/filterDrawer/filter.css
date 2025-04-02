@@ -4,10 +4,6 @@
   background-color: #f3f3f3 !important;
 }
 
-.filter-drawer-paper * {
-  font-weight: bold;
-}
-
 .filter-drawer-container {
   width: 100%;
   display: flex;
@@ -15,16 +11,6 @@
   height: 100%;
 }
 
-.filter-drawer-title {
-  
-  margin-bottom: 16px;
-  
-}
-
-.filter-drawer-subtitle {
-  margin-bottom: 8px;
-  
-}
 
 .filter-field-container {
   margin-bottom: 16px;
@@ -35,19 +21,6 @@
   margin-bottom: 16px;
 }
 
-.filter-range-title {
-  margin-bottom: 16px;
-}
-
-.filter-range-field {
-  margin-bottom: 16px;
-}
-
-.filter-range-field-label {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
 
 .filter-actions {
   display: flex;
@@ -56,7 +29,7 @@
   padding-top: 24px;
 }
 
-.filter-actions .filter-button.MuiButton-contained {
+.filter-actions .filter-button-search, .filter-actions .filter-button-clear  {
   background-color: #EBEBEB;
   min-width: 80px;
   color: #000000;
@@ -66,36 +39,17 @@
   box-shadow: none;
 }
 
-.filter-actions .filter-button.MuiButton-contained:hover {
-  background-color: #aaaaaa !important;
+.filter-actions .filter-button-clear{
+  margin-right: 10px;
+}
+
+.filter-actions .filter-button-search:hover, .filter-actions .filter-button-clear:hover {
+  background-color: #aaaaaa ;
   border-radius: 1;
   border-color: #575757;
-}
-
-.filter-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.filter-head .filter-button.MuiButton-contained {
-  background-color: #EBEBEB;
-  min-width: 40px;
-  min-height: 10px;
-  color: #000000;
-  border: 1px solid #b4b4b4;
-  border-radius: 3px;
-  font-size: 0.8rem;
   box-shadow: none;
-  padding: 4px 8px;
 }
 
-.filter-head .filter-button.MuiButton-contained:hover {
-  background-color: #aaaaaa !important;
-  border-radius: 1;
-  border-color: #575757;
-}
 
 @media screen and (max-width: 1200px) {
   .filter-drawer-paper {
@@ -120,15 +74,12 @@
     padding: 16px;
   }
   
-  .filter-drawer-title {
-    font-size: medium;
-  }
   
   .filter-range-container {
     margin-top: 20%;
   }
   
-  .filter-actions .filter-button.MuiButton-contained {
+  .filter-actions .filter-button-search, .filter-actions .filter-button-clear {
     min-width: 70px;
     font-size: 0.9rem;
   }
@@ -138,15 +89,6 @@
   .filter-drawer-paper {
     width: 85%; 
     padding: 12px;
-  }
-  
-  .filter-drawer-title {
-    font-size: medium;
-    margin-bottom: 12px;
-  }
-  
-  .filter-drawer-subtitle {
-    margin-bottom: 6px;
   }
   
   .filter-field-container {
@@ -170,7 +112,7 @@
     padding-top: 16px;
   }
   
-  .filter-actions .filter-button.MuiButton-contained {
+  .filter-actions .filter-button-search, .filter-actions .filter-button-clear {
     min-width: 60px;
     font-size: 0.8rem;
   }

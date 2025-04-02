@@ -12,9 +12,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import SearchIcon from '@mui/icons-material/Search';
 import './filter.css';
-import { FilterField, RangeField, FilterDrawerProps } from '../../interfaces';
+import { FilterField, FilterDrawerProps } from '../../interfaces';
 
-export const FilterDrawer: React.FC<FilterDrawerProps> = ({
+export const FilterDrawer = ({
   open,
   onClose,
   title,
@@ -23,7 +23,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   initialData,
   onFilteredDataChange,
   filterFunctions,
-}) => {
+}: FilterDrawerProps) => {
   const [filters, setFilters] = React.useState<Record<string, any>>({});
 
   const handleInputChange = (id: string, value: any) => {
@@ -31,7 +31,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   };
 
   const applyFilters = () => {
-    let filteredData = [...initialData];
+    let filteredData = initialData;
     
     Object.entries(filters).forEach(([key, value]) => {
       if (value && filterFunctions[key]) {
@@ -135,24 +135,23 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
         
         {fields.map((field) => (
           <Box key={field.id} className="filter-field-container">
-            <Typography variant="subtitle2" className="filter-drawer-subtitle">
+            <Typography variant="subtitle1">
               {field.label}
             </Typography>
             {renderField(field)}
           </Box>
         ))}
-
         {rangeFields && rangeFields.length > 0 && (
+
           <Box className="filter-range-container">
-            <Typography variant="h5" className="filter-range-title">
+            <Typography variant="h5" >
               RANGO
             </Typography>
-            {rangeFields.map((range) => (
-              <Box key={`${range.startId}-${range.endId}`} className="filter-range-field">
-                <Typography variant="subtitle2" className="filter-range-field-label">
-                  {range.startLabel}
-                </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {rangeFields.map((range) => (
+                <Box key={`${range.startId}-${range.endId}`} className="filter-range-field">
+                  <Typography variant="subtitle2">{range.startLabel}</Typography>
+
                   <DatePicker
                     value={filters[range.startId] || null}
                     onChange={(newValue) => handleInputChange(range.startId, newValue)}
@@ -167,12 +166,9 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
                     }}
                     format="DD/MM/YY"
                   />
-                </LocalizationProvider>
-                
-                <Typography variant="subtitle2" className="filter-range-field-label">
-                  {range.endLabel}
-                </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                  <Typography variant="subtitle2">{range.endLabel}</Typography>
+
                   <DatePicker
                     value={filters[range.endId] || null}
                     onChange={(newValue) => handleInputChange(range.endId, newValue)}
@@ -187,25 +183,23 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
                     }}
                     format="DD/MM/YY"
                   />
-                </LocalizationProvider>
-              </Box>
-            ))}
+                </Box>
+              ))}
+            </LocalizationProvider>
           </Box>
         )}
-
         <Box className="filter-actions">
           <Button 
             variant="contained" 
             onClick={clearFilters}
-            className="filter-button"
-            sx={{ marginRight: 2 }}
+            className="filter-button-clear"
           >
             Limpiar
           </Button>
           <Button 
             variant="contained" 
             onClick={applyFilters}
-            className="filter-button"
+            className="filter-button-search"
           >
             Buscar
           </Button>

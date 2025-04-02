@@ -6,7 +6,7 @@ import { HistorialDocumentos } from "../pages";
 export default function DashboardRoutes() {
   return (
     <Routes>
-      <Route path="historial" element={<HistorialDocumentos />} />
+      <Route path="history" element={<HistorialDocumentos />} />
     </Routes>
   );
 }
