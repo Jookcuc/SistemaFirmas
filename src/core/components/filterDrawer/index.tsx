@@ -6,37 +6,13 @@ import {
   Button,
   TextField,
   InputAdornment,
-  IconButton
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import SearchIcon from '@mui/icons-material/Search';
 import './filter.css';
-
-interface FilterField {
-  id: string;
-  label: string;
-  type: 'text' | 'date' | 'select';
-  placeholder?: string;
-  options?: Array<{ value: string; label: string }>;
-}
-
-interface RangeField {
-  startId: string;
-  endId: string;
-  startLabel: string;
-  endLabel: string;
-}
-
-interface FilterDrawerProps {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  fields: FilterField[];
-  rangeFields?: RangeField[];
-  onApplyFilters: (filters: any) => void;
-}
+import { FilterField, RangeField, FilterDrawerProps } from '../../interfaces';
 
 export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   open,
@@ -44,7 +20,9 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   title,
   fields,
   rangeFields,
-  onApplyFilters
+  initialData,
+  onFilteredDataChange,
+  filterFunctions,
 }) => {
   const [filters, setFilters] = React.useState<Record<string, any>>({});
 
@@ -52,9 +30,24 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
     setFilters((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleApplyFilters = () => {
-    onApplyFilters(filters);
+  const applyFilters = () => {
+    let filteredData = [...initialData];
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value && filterFunctions[key]) {
+        filteredData = filteredData.filter(item => 
+          filterFunctions[key](item, value)
+        );
+      }
+    });
+    
+    onFilteredDataChange(filteredData);
     onClose();
+  };
+
+  const clearFilters = () => {
+    setFilters({});
+    onFilteredDataChange([...initialData]);
   };
 
   const renderField = (field: FilterField) => {
@@ -136,7 +129,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
       }}
     >
       <Box className="filter-drawer-container">
-        <Typography variant="h6" className="filter-drawer-title">
+        <Typography variant="h5" className="filter-drawer-title">
           {title}
         </Typography>
         
@@ -151,7 +144,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
 
         {rangeFields && rangeFields.length > 0 && (
           <Box className="filter-range-container">
-            <Typography variant="h6" className="filter-range-title">
+            <Typography variant="h5" className="filter-range-title">
               RANGO
             </Typography>
             {rangeFields.map((range) => (
@@ -203,10 +196,16 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
         <Box className="filter-actions">
           <Button 
             variant="contained" 
-            color="primary" 
-            onClick={handleApplyFilters}
+            onClick={clearFilters}
             className="filter-button"
-            
+            sx={{ marginRight: 2 }}
+          >
+            Limpiar
+          </Button>
+          <Button 
+            variant="contained" 
+            onClick={applyFilters}
+            className="filter-button"
           >
             Buscar
           </Button>

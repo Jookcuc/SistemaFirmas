@@ -1,49 +1,188 @@
 .filter-drawer-paper {
-    width: 320px;
-    padding: 24px;
-  }
+  width: 35%;
+  padding: 24px;
+  background-color: #f3f3f3 !important;
+}
+
+.filter-drawer-paper * {
+  font-weight: bold;
+}
+
+.filter-drawer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.filter-drawer-title {
   
-  .filter-drawer-container {
-    width: 100%;
-  }
+  margin-bottom: 16px;
   
-  .filter-drawer-title {
-    margin-bottom: 16px;
-  }
+}
+
+.filter-drawer-subtitle {
+  margin-bottom: 8px;
   
-  .filter-drawer-subtitle {
-    margin-bottom: 8px;
+}
+
+.filter-field-container {
+  margin-bottom: 16px;
+}
+
+.filter-range-container {
+  margin-top: 34%;
+  margin-bottom: 16px;
+}
+
+.filter-range-title {
+  margin-bottom: 16px;
+}
+
+.filter-range-field {
+  margin-bottom: 16px;
+}
+
+.filter-range-field-label {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto; 
+  padding-top: 24px;
+}
+
+.filter-actions .filter-button.MuiButton-contained {
+  background-color: #EBEBEB;
+  min-width: 80px;
+  color: #000000;
+  border: 1px solid #b4b4b4;
+  border-radius: 3px;
+  font-size: 1rem;
+  box-shadow: none;
+}
+
+.filter-actions .filter-button.MuiButton-contained:hover {
+  background-color: #aaaaaa !important;
+  border-radius: 1;
+  border-color: #575757;
+}
+
+.filter-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.filter-head .filter-button.MuiButton-contained {
+  background-color: #EBEBEB;
+  min-width: 40px;
+  min-height: 10px;
+  color: #000000;
+  border: 1px solid #b4b4b4;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  box-shadow: none;
+  padding: 4px 8px;
+}
+
+.filter-head .filter-button.MuiButton-contained:hover {
+  background-color: #aaaaaa !important;
+  border-radius: 1;
+  border-color: #575757;
+}
+
+@media screen and (max-width: 1200px) {
+  .filter-drawer-paper {
+    width: 40%; 
   }
-  
-  .filter-field-container {
-    margin-bottom: 16px;
+}
+
+@media screen and (max-width: 992px) {
+  .filter-drawer-paper {
+    width: 50%; 
+    padding: 20px;
   }
   
   .filter-range-container {
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 25%; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter-drawer-paper {
+    width: 70%; 
+    padding: 16px;
   }
   
-  .filter-range-title {
-    margin-bottom: 16px;
+  .filter-drawer-title {
+    font-size: medium;
+  }
+  
+  .filter-range-container {
+    margin-top: 20%;
+  }
+  
+  .filter-actions .filter-button.MuiButton-contained {
+    min-width: 70px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .filter-drawer-paper {
+    width: 85%; 
+    padding: 12px;
+  }
+  
+  .filter-drawer-title {
+    font-size: medium;
+    margin-bottom: 12px;
+  }
+  
+  .filter-drawer-subtitle {
+    margin-bottom: 6px;
+  }
+  
+  .filter-field-container {
+    margin-bottom: 12px;
+  }
+  
+  .filter-range-container {
+    margin-top: 15%;
+    margin-bottom: 12px;
   }
   
   .filter-range-field {
+    margin-bottom: 12px;
+  }
+  
+  .filter-head {
     margin-bottom: 16px;
   }
   
-  .filter-range-field-label {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-  
   .filter-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 24px;
+    padding-top: 16px;
   }
   
-  .filter-button .MuiButton-root {
-    min-width: 80px;
-    background-color: #B7B7B7 !important;
+  .filter-actions .filter-button.MuiButton-contained {
+    min-width: 60px;
+    font-size: 0.8rem;
   }
+}
+
+@media screen and (max-width: 320px) {
+  .filter-drawer-paper {
+    width: 95%; 
+    padding: 10px;
+  }
+  
+  .filter-range-container {
+    margin-top: 10%;
+  }
+}

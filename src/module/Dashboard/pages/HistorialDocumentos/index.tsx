@@ -6,8 +6,8 @@ import { ReTable } from '../../../../core/components/table';
 import { FilterDrawer } from '../../../../core/components/filterDrawer';
 import './HistorialDocumentos.css';
 import { ActionDefinition } from '../../../../core/interfaces';
+import { useTranslation } from 'react-i18next';
 
-// Mover los datos iniciales fuera del componente para mejor rendimiento
 const initialDocuments = [
   {
     documentName: 'Documento06.pdf',
@@ -15,46 +15,45 @@ const initialDocuments = [
     signatureDate: '13 de marzo de 2025',
     downloadUrl: 'https://drive.google.com/uc?export=download&id=18eWDey9nZc2RTDNtQS-3TGuowVGTTHq4'
   },
-  // ... (resto de los documentos)
 ];
 
 export const HistorialDocumentos: React.FC = () => {
-  const [documents, setDocuments] = useState(initialDocuments);
+  const { t } = useTranslation();
+  const [filteredDocuments, setFilteredDocuments] = useState(initialDocuments);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
-  const [appliedFilters, setAppliedFilters] = useState({});
 
   const columns = useMemo(() => [
-    { key: 'documentName', label: 'Nombre del Documento' },
-    { key: 'uploadDate', label: 'Fecha de Subida' },
-    { key: 'signatureDate', label: 'Fecha de Firma' }
-  ], []);
+    { key: 'documentName', label: t('StringsHistorial.table.columns.documentName') },
+    { key: 'uploadDate', label: t('StringsHistorial.table.columns.uploadDate') },
+    { key: 'signatureDate', label: t('StringsHistorial.table.columns.signatureDate') }
+  ], [t]);
 
   const actions: ActionDefinition[] = useMemo(() => [
     {
-      label: 'Descargar',
+      label: t('StringsHistorial.buttons.download'),
       onClick: (row: any) => window.location.href = row.downloadUrl,
       variant: 'contained'
     },
     {
-      label: 'Previsualizar',
+      label: t('StringsHistorial.buttons.preview'),
       onClick: (row: any) => {
         console.log('Previsualizar', row);
       },
       variant: 'contained'
     }
-  ], []);
+  ], [t]);
 
   const { filterFields, rangeFields } = useMemo(() => ({
     filterFields: [
       {
         id: 'documentName',
-        label: 'Nombre de Documento',
+        label: t('StringsHistorial.filter.documentName.label'),
         type: 'text' as const,
-        placeholder: 'Buscar nombre de documento'
+        placeholder: t('StringsHistorial.filter.documentName.placeholder')
       },
       {
         id: 'signatureDate',
-        label: 'Fecha de Firma',
+        label: t('StringsHistorial.filter.signatureDate.label'),
         type: 'date' as const
       }
     ],
@@ -62,40 +61,18 @@ export const HistorialDocumentos: React.FC = () => {
       {
         startId: 'startDate',
         endId: 'endDate',
-        startLabel: 'Fecha inicio',
-        endLabel: 'Fecha fin'
+        startLabel: t('StringsHistorial.filter.dateRange.startLabel'),
+        endLabel: t('StringsHistorial.filter.dateRange.endLabel')
       }
     ]
-  }), []);
+  }), [t]);
 
-  const handleApplyFilters = (filters: any) => {
-    console.log('Filtros aplicados:', filters);
-    setAppliedFilters(filters);
-    
-    // Aplicar filtros a los documentos
-    let filteredDocuments = [...initialDocuments]; // Usamos la copia original
-    
-    if (filters.documentName) {
-      filteredDocuments = filteredDocuments.filter(doc => 
-        doc.documentName.toLowerCase().includes(filters.documentName.toLowerCase())
-      );
-    }
-    
-    if (filters.signatureDate) {
-      // Implementar lógica de filtrado por fecha según tu formato de fecha
-      // Ejemplo básico (necesitarías adaptarlo a tu formato de fecha)
-      filteredDocuments = filteredDocuments.filter(doc => 
-        doc.signatureDate.includes(filters.signatureDate)
-      );
-    }
-    
-    if (filters.startDate && filters.endDate) {
-      // Implementar lógica de filtrado por rango de fechas
-      // Necesitarías convertir las fechas a un formato comparable
-    }
-    
-    setDocuments(filteredDocuments);
-  };
+  const documentFilterFunctions = useMemo(() => ({
+    documentName: (doc: any, filterValue: string) => 
+      doc.documentName.toLowerCase().includes(filterValue.toLowerCase()),
+    signatureDate: (doc: any, filterValue: string) =>
+      doc.signatureDate.includes(filterValue),
+  }), []);
 
   return (
     <Box className="document-history-page">
@@ -103,28 +80,31 @@ export const HistorialDocumentos: React.FC = () => {
       <Container maxWidth="lg" className="page-content">
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h5" className="page-title">
-            Historial de Documentos
+            {t('StringHistorialDocumentos.StringsHistorial.title.pageTitle')}
           </Typography>
           <IconButton 
             className="filter-icon" 
             onClick={() => setIsFilterDrawerOpen(true)}
+            aria-label={t('StringsHistorial.buttons.filter')}
           >
             <FilterListIcon />
           </IconButton>
         </Box>
         <ReTable 
           columns={columns}
-          rows={documents}
+          rows={filteredDocuments}
           actions={actions}
         />
         
         <FilterDrawer
           open={isFilterDrawerOpen}
           onClose={() => setIsFilterDrawerOpen(false)}
-          title="FILTRAR"
+          title={t('StringsHistorial.title.filterTitle')}
           fields={filterFields}
           rangeFields={rangeFields}
-          onApplyFilters={handleApplyFilters}
+          initialData={initialDocuments}
+          onFilteredDataChange={setFilteredDocuments}
+          filterFunctions={documentFilterFunctions}
         />
       </Container>
     </Box>
