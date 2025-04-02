@@ -1,65 +1,61 @@
 export const StringsAuth = {
-  es: {
-    translation: {
-      "StringsAuth": {
-        "title": {
-          "welcome": "Bienvenido",
-          "createAccount": "Creación de Cuenta",
-          "emailVerification": "Verificar Correo Electronico"
-        },
-        "buttons": {
-          "login": "Iniciar Sesión",
-          "register": "Regístrate",
-          "sign": "Firmar",
-          "next": "Siguiente",
-          "registerButton": "Registrarse",
-          "verifyCode": "Verificar Código"
-        },
-        "inputs": {
-          "email": "Correo",
-          "password": "Contraseña",
-          "name": "Nombre",
-          "lastName": "Apellido",
-          "productKey": "Clave de Producto",
-          "confirmPassword": "Confirmar Contraseña",
-        },
-        "checkboxes": {
-          "rememberMe": "Recuérdame"
-        },
-        "links": {
-          "forgotPassword": "¿Olvidaste tu contraseña?",
-          "noAccount": "¿No tienes una cuenta?"
-        },
-        "required":{
-          "passwordObligatory": "La contraseña es obligatoria",
-          "emailObligatory": "El correo electrónico es obligatorio",
-          "correctEmail": "Por favor, introduce un correo electrónico válido",
-          "nameRequired": "El nombre es obligatorio",
-          "lastNameRequired": "El apellido es obligatorio",
-          "productKeyRequired": "La clave del producto es obligatoria",
-          "signRequired": "La firma es obligatoria",
-          "confirmPasswordRequired": "El campo Confirmar Contraseña es obligatorio",
-          "confirmationCodeRequired": "Por favor, rellene todos los campos del código"
-        },
-        "validations":{
-          "nameLength": "El nombre debe tener al menos 2 caracteres",
-          "lastNameLength": "El apellido debe tener al menos 2 caracteres",
-          "productKeyLength": "Ingrese una clave de producto valida",
-          "emailValid": "Por favor, introduce un correo electrónico válido",
-          "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
-          "passwordMaxLength": "La contraseña puede tener como maximo 127 caracteres",
-          "passwordNumber": "La contraseña debe tener al menos 1 número",
-          "passwordSymbol": "La contraseña debe tener al menos 1 simbolo",
-          "confirmPassword": "Las contraseñas son diferentes"
-        },
-        "steps":{
-          "personalData": "Datos Personales",
-          "accessData": "Datos de Acceso"
-        },
-        "texts":{
-          "verifyEmail": "Ingresa el codigo enviado a tu correo"
-        }
-      }
+  "StringsAuth": {
+    "title": {
+      "welcome": "Bienvenido",
+      "createAccount": "Creación de Cuenta",
+      "emailVerification": "Verificar Correo Electronico"
+    },
+    "buttons": {
+      "login": "Iniciar Sesión",
+      "register": "Regístrate",
+      "sign": "Firmar",
+      "next": "Siguiente",
+      "registerButton": "Registrarse",
+      "verifyCode": "Verificar Código"
+    },
+    "inputs": {
+      "email": "Correo",
+      "password": "Contraseña",
+      "name": "Nombre",
+      "lastName": "Apellido",
+      "productKey": "Clave de Producto",
+      "confirmPassword": "Confirmar Contraseña",
+    },
+    "checkboxes": {
+      "rememberMe": "Recuérdame"
+    },
+    "links": {
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes una cuenta?"
+    },
+    "required": {
+      "passwordObligatory": "La contraseña es obligatoria",
+      "emailObligatory": "El correo electrónico es obligatorio",
+      "correctEmail": "Por favor, introduce un correo electrónico válido",
+      "nameRequired": "El nombre es obligatorio",
+      "lastNameRequired": "El apellido es obligatorio",
+      "productKeyRequired": "La clave del producto es obligatoria",
+      "signRequired": "La firma es obligatoria",
+      "confirmPasswordRequired": "El campo Confirmar Contraseña es obligatorio",
+      "confirmationCodeRequired": "Por favor, rellene todos los campos del código"
+    },
+    "validations": {
+      "nameLength": "El nombre debe tener al menos 2 caracteres",
+      "lastNameLength": "El apellido debe tener al menos 2 caracteres",
+      "productKeyLength": "Ingrese una clave de producto valida",
+      "emailValid": "Por favor, introduce un correo electrónico válido",
+      "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+      "passwordMaxLength": "La contraseña puede tener como maximo 127 caracteres",
+      "passwordNumber": "La contraseña debe tener al menos 1 número",
+      "passwordSymbol": "La contraseña debe tener al menos 1 simbolo",
+      "confirmPassword": "Las contraseñas son diferentes"
+    },
+    "steps": {
+      "personalData": "Datos Personales",
+      "accessData": "Datos de Acceso"
+    },
+    "texts": {
+      "verifyEmail": "Ingresa el codigo enviado a tu correo"
     }
   },
   en: {
@@ -93,10 +89,10 @@ export const StringsAuth = {
           "forgotPassword": "Forgot Password?",
           "noAccount": "Don't have an account?"
         },
-        "required":{
-          "passwordObligatory":"Password is required",
-          "emailObligatory":"Email is required",
-          "correctEmail":"Please enter a valid email address",
+        "required": {
+          "passwordObligatory": "Password is required",
+          "emailObligatory": "Email is required",
+          "correctEmail": "Please enter a valid email address",
           "nameRequired": "Name is requiered",
           "lastNameRequired": "Last name is requiered",
           "productKeyRequired": "Product key is requiered",
@@ -104,7 +100,7 @@ export const StringsAuth = {
           "confirmPasswordRequired": "The field Confirm Password is required",
           "confirmationCodeRequired": "Please fill all fields of the code"
         },
-        "validations":{
+        "validations": {
           "nameLength": "The name must have at least 2 characters",
           "lastNameLength": "The last name must have at least 2 characters",
           "productKeyLength": "Enter a valid product key",
@@ -115,11 +111,11 @@ export const StringsAuth = {
           "passwordSymbol": "The password must have at least a simbol",
           "confirmPassword": "The passwords are different"
         },
-        "steps":{
+        "steps": {
           "personalData": "Personal Data",
           "accessData": "Access Data"
         },
-        "texts":{
+        "texts": {
           "verifyEmail": "Enter the code send to your email"
         }
       }

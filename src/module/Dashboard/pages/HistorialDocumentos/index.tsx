@@ -18,6 +18,8 @@ const initialDocuments = [
   },
 ];
 
+//prueba
+
 export const HistorialDocumentos = () => {
   const { t } = useTranslation();
   const [filteredDocuments, setFilteredDocuments] = useState(() => initialDocuments);

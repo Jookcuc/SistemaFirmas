@@ -50,10 +50,10 @@ export const StringsAuth = {
           "noAccount": "Don't have an account?"
         },
 
-        "required":{
-          "passwordObligatory":"Password is required",
-          "emailObligatory":"Email is required",
-          "correctEmail":"Please enter a valid email address",
+        "required": {
+          "passwordObligatory": "Password is required",
+          "emailObligatory": "Email is required",
+          "correctEmail": "Please enter a valid email address",
 
 
         }
