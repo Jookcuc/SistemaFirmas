@@ -5,7 +5,8 @@ export const StringsAuth = {
         "title": {
           "welcome": "Bienvenido",
           "createAccount": "Creación de Cuenta",
-          "emailVerification": "Verificar Correo Electronico"
+          "emailVerification": "Verificar Correo Electronico",
+          "recoverPassword":"Recuperar Contraseña"
         },
         "buttons": {
           "login": "Iniciar Sesión",
@@ -13,7 +14,9 @@ export const StringsAuth = {
           "sign": "Firmar",
           "next": "Siguiente",
           "registerButton": "Registrarse",
-          "verifyCode": "Verificar Código"
+          "verifyCode": "Verificar Código",
+          "verifyEmail":"Verificar Correo",
+          "changePassword":"Cambiar Contraseña"
         },
         "inputs": {
           "email": "Correo",
@@ -22,6 +25,7 @@ export const StringsAuth = {
           "lastName": "Apellido",
           "productKey": "Clave de Producto",
           "confirmPassword": "Confirmar Contraseña",
+          "code":"Código"
         },
         "checkboxes": {
           "rememberMe": "Recuérdame"
@@ -39,7 +43,9 @@ export const StringsAuth = {
           "productKeyRequired": "La clave del producto es obligatoria",
           "signRequired": "La firma es obligatoria",
           "confirmPasswordRequired": "El campo Confirmar Contraseña es obligatorio",
-          "confirmationCodeRequired": "Por favor, rellene todos los campos del código"
+          "confirmationCodeRequired": "Por favor, rellene todos los campos del código",
+          "codeObligatory":"El campo Código es obligatorio",
+          "maxLengthCode":"El código es de 6 digitos",
         },
         "validations":{
           "nameLength": "El nombre debe tener al menos 2 caracteres",
@@ -50,14 +56,18 @@ export const StringsAuth = {
           "passwordMaxLength": "La contraseña puede tener como maximo 127 caracteres",
           "passwordNumber": "La contraseña debe tener al menos 1 número",
           "passwordSymbol": "La contraseña debe tener al menos 1 simbolo",
-          "confirmPassword": "Las contraseñas son diferentes"
+          "confirmPassword": "Las contraseñas son diferentes",
+          "correctCode":"Porfavor ingrese un codigo valido"
         },
         "steps":{
           "personalData": "Datos Personales",
           "accessData": "Datos de Acceso"
         },
         "texts":{
-          "verifyEmail": "Ingresa el codigo enviado a tu correo"
+          "verifyEmail": "Ingresa el codigo enviado a tu correo",
+          "putEmail":"Ingresa tu correo electronico para restablecer la contraseña",
+          "enterCode":"Ingresa el código enviado al correo electronico",
+          "newPassword":"Escribe tu nueva contraseña"
         }
       }
     }
@@ -68,7 +78,8 @@ export const StringsAuth = {
         "title": {
           "welcome": "Welcome",
           "createAccount": "Create your Account",
-          "emailVerification": "Verify your Email"
+          "emailVerification": "Verify your Email",
+          "recoverPassword":"Recover Password"
         },
         "buttons": {
           "login": "Login",
@@ -76,7 +87,9 @@ export const StringsAuth = {
           "sign": "Sign",
           "next": "Next",
           "registerButton": "Register",
-          "verifyCode": "Verify Code"
+          "verifyCode": "Verify Code",
+          "verifyEmail":"Verify Email",
+          "changePassword":"Change Password"
         },
         "inputs": {
           "email": "Email",
@@ -85,6 +98,7 @@ export const StringsAuth = {
           "lastName": "Last Name",
           "productKey": "Product Key",
           "confirmPassword": "Confirm Password",
+          "code":"Code",
         },
         "checkboxes": {
           "rememberMe": "Remember me"
@@ -102,7 +116,9 @@ export const StringsAuth = {
           "productKeyRequired": "Product key is requiered",
           "signRequired": "Signature is required",
           "confirmPasswordRequired": "The field Confirm Password is required",
-          "confirmationCodeRequired": "Please fill all fields of the code"
+          "confirmationCodeRequired": "Please fill all fields of the code",
+          "codeObligatory":"The field Code is required",
+          "maxLengthCode":"The code have 6 characters",
         },
         "validations":{
           "nameLength": "The name must have at least 2 characters",
@@ -113,14 +129,18 @@ export const StringsAuth = {
           "passwordMaxLength": "The password only supports 127 characters",
           "passwordNumber": "The password must have at least a number",
           "passwordSymbol": "The password must have at least a simbol",
-          "confirmPassword": "The passwords are different"
+          "confirmPassword": "The passwords are different",
+          "correctCode":"Please enter a valid code"
         },
         "steps":{
           "personalData": "Personal Data",
           "accessData": "Access Data"
         },
         "texts":{
-          "verifyEmail": "Enter the code send to your email"
+          "verifyEmail": "Enter the code send to your email",
+          "putEmail":"Enter your email address to reset your password.",
+          "enterCode":"Ingresa the code sended on the email",
+          "newPassword":"Type your new Password"
         }
       }
     }

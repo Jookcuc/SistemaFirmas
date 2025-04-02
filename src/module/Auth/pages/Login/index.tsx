@@ -93,7 +93,7 @@ export const LoginPage: React.FC = () => {
                   sx={{ fontSize: "small" }}
                 />
 
-                <Typography component="a" href="#" color="primary" sx={{ textDecoration: "none" }}>
+                <Typography component="a" href="./forgotpassword" color="primary" sx={{ textDecoration: "none" }}>
                   {t('StringsAuth.links.forgotPassword')}
                 </Typography>
               </Box>
