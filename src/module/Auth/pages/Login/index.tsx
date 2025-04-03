@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+import { getUsers } from '../../../../core';
 import './Login.css';
-import {LoginFormData} from './login.interface';
+import { LoginFormData } from './login.interface';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Checkbox, FormControlLabel, Typography, Box } from '@mui/material';
 import { LoginLayout } from '../../../../core';
@@ -10,13 +12,17 @@ import LoginImage from '../../../../assets/assetsLogin/ImagenLogin.svg';
 import { useTranslation } from 'react-i18next';
 
 export const LoginPage: React.FC = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
-  const { 
-    control, 
-    handleSubmit, 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const {
+    control,
+    handleSubmit,
     register,
-    watch 
+    watch
   } = useForm<LoginFormData>({
     defaultValues: {
       email: '',
@@ -43,7 +49,7 @@ export const LoginPage: React.FC = () => {
         <LoginLayout title={t("StringsAuth.title.welcome")} className="loginLayoutContainer" >
           <Box className="childContainer">
             <Box className="formContainer" component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-              
+
               <Box className="inpuntContainer">
                 <Input
                   className="textField"
@@ -98,9 +104,9 @@ export const LoginPage: React.FC = () => {
                 </Typography>
               </Box>
 
-              <Button 
-                type="submit" 
-                variant="contained" 
+              <Button
+                type="submit"
+                variant="contained"
                 disabled={!email || !password}
               >
                 {t("StringsAuth.buttons.login")}
@@ -111,7 +117,7 @@ export const LoginPage: React.FC = () => {
             <Box className="registerContainer">
               <Typography component="p">{t("StringsAuth.links.noAccount")}</Typography>
               <Typography component="a" href="./register" color="primary" sx={{ textDecoration: "none" }}>
-              {t("StringsAuth.buttons.register")}
+                {t("StringsAuth.buttons.register")}
               </Typography>
             </Box>
           </Box>

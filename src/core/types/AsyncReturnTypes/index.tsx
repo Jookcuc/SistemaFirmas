@@ -1,4 +1,4 @@
-import { ErrorCodeEnums } from "../../enums"
+import { ErrorCodeEnums } from "../../enums/ErrorCode"
 
 export type errorType = {
   errors: {
