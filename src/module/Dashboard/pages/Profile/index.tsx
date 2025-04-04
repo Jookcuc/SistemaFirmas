@@ -1,13 +1,16 @@
 import './profile.css'
-import { Avatar, Badge, Box, Button, Container, Divider, FormHelperText, IconButton, InputAdornment, Step, StepButton, Stepper, TextField, Typography } from "@mui/material"
+import { Avatar, Badge, Box, Button, Divider, FormHelperText, IconButton, InputAdornment, Step, StepButton, Stepper, Typography } from "@mui/material"
 import { Header } from "../../../../core/components/header"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Input, SignatureModal } from "../../../../core"
 import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg'
 import { ProfileData } from './Profile.interface'
+import { useTranslation } from 'react-i18next'
 
 export const Profile = () => {
+
+  const { t } = useTranslation()
 
   const steps = [
     "Informacion Personal",
@@ -40,7 +43,6 @@ export const Profile = () => {
   const email = watch("email")
   const password = watch("password")
   const confirmPassword = watch("confirmPassword")
-  const picture = watch("picture")
 
   const [open, setOpen] = useState(false)
   const [avatarSrc, setAvatarSrc] = useState("/profile.jpg")
@@ -79,11 +81,11 @@ export const Profile = () => {
 
   //@ts-ignore
   const onSubmit = handleSubmit((data) => {
-    //Inset the code when you send the data
+    //Insert the code when you send the data
   })
 
   useEffect(() => {
-      register("signature", { required: "La firma es necesaria" });
+      register("signature", { required: t("StringsProfile.required.sign") });
     }, [register]);
 
   useEffect(() => {
@@ -116,7 +118,7 @@ export const Profile = () => {
             paddingTop: "2vh"
           }}
         >
-          Configuración de usuario
+          {t("StringsProfile.title.pageTitle")}
         </Typography>
         
         <Box 
@@ -126,7 +128,7 @@ export const Profile = () => {
           noValidate
         >
           <Typography variant="h6"sx={{paddingX: "1.2rem"}}>
-            Información personal y firma
+            {t("StringsProfile.title.sectionTitle")}
           </Typography>
 
           <Box className="userProfile">
@@ -199,7 +201,7 @@ export const Profile = () => {
                 </Box>
                 
                 <Button variant="contained" onClick={handleOpen} fullWidth  className="profileFirmButton">
-                  Repetir Firma
+                  {t("StringsProfile.buttons.sign")}
                 </Button>
               </Box>
                   
@@ -220,12 +222,12 @@ export const Profile = () => {
               <Input
                 id="name"
                 name="name"
-                label="Name"
+                label={t("StringsProfile.inputs.name")}
                 control={control}
                 rules={{
-                  required: "El nombre es obligatorio",
+                  required: t("StringsProfile.required.name"),
                   validate: (value: string) => {
-                    return (value.length < 2) ? "El nombre debe tener más de 2 letras" : true
+                    return (value.length < 2) ? t("StringsProfile.rules.name.minLength") : true
                   }
                 }}
               />
@@ -233,12 +235,12 @@ export const Profile = () => {
               <Input
                 id="lastName"
                 name="lastName"
-                label="Last Name"
+                label={t("StringsProfile.inputs.lastName")}
                 control={control}
                 rules={{
-                  required: "El apellido es obligatorio",
+                  required: t("StringsProfile.required.lastName"),
                   validate: (value: string) => {
-                    return (value.length < 2) ? "El apellido debe tener más de 2 letras" : true
+                    return (value.length < 2) ? t("StringsProfile.rules.lastName.minLength") : true
                   }
                 }}
               />
@@ -246,14 +248,14 @@ export const Profile = () => {
               <Input
                 id="email"
                 name="email"
-                label="Email"
+                label={t("StringsProfile.inputs.email")}
                 control={control}
                 type="email"
                 rules={{
-                  required: "El email es obligatorio",
+                  required: t("StringsProfile.required.email"),
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Por favor, ingrese un email valido"
+                    message: t("StringsProfile.rules.email.validEmail")
                   }
                 }}
               />
@@ -261,26 +263,26 @@ export const Profile = () => {
               <Input
                 id="password"
                 name="password"
-                label="Password"
+                label={t("StringsProfile.inputs.password")}
                 control={control}
                 type="password"
                 rules={{
-                  required: "La contraseña es obligatoria",
+                  required: t("StringsProfile.required.password"),
                   minLength: {
                     value: 8,
-                    message: "La contraseña debe tener al menos 8 caracteres"
+                    message: t("StringsProfile.rules.password.minLength")
                   },
                   maxLength: {
                     value: 127,
-                    message: "La contraseña debe tener como maximo 127 caracteres"
+                    message:  t("StringsProfile.rules.password.maxLength")
                   },
                   validate: (value: string) => {
                     if (!/\d/.test(value)) {
-                      return "La contraseña debe de contener al menos un numero"
+                      return  t("StringsProfile.rules.password.number")
                     }
                     
                     if (!/[\W_]/.test(value)) {
-                      return "La contraseña debe tener al menos un simbolo"
+                      return  t("StringsProfile.rules.password.symbol")
                     }
                   }
                 }}
@@ -295,14 +297,14 @@ export const Profile = () => {
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
-                  label="Confirm Password"
+                  label={t("StringsProfile.inputs.confirm")}
                   control={control}
                   type="password"
                   rules={{
-                    required: "Debes de confirmar tu contraseña",
+                    required: t("StringsProfile.required.confirmPassword"),
                     validate: (value: string) => {
                       if (value !== password) {
-                        return "Las contraseñas son distintas"
+                        return  t("StringsProfile.rules.confirmPassword.equals")
                       }
                     }
                   }}
@@ -317,7 +319,7 @@ export const Profile = () => {
                     marginTop: "0.5rem",
                   }}
                 > 
-                  Confirmar
+                  {t("StringsProfile.buttons.confirm")}
                 </Button>
               </Box>
             </Box>  
