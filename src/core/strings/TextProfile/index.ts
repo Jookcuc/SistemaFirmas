@@ -4,6 +4,10 @@ export const StringsProfile = {
       "pageTitle": "Configuración de Usuario",
       "sectionTitle": "Información personal y firma"
     },
+    "steps":{
+      "personalIfno": "Información Personal",
+      "userData": "Datos de Usuario"
+    },
     "buttons": {
       "sign": "Repetir Firma",
       "confirm": "Confirmar"
@@ -61,6 +65,34 @@ export const StringsProfile = {
           "email": "Email",
           "password": "Password",
           "confirmPassword": "Confirm Password"
+        },
+        "required":{
+          "name": "The name is requiered",
+          "lastName": "The last name is required",
+          "email": "The email is required",
+          "password": "The password is required",
+          "confirmPassword": "You need to confirm your password",
+          "sign": "The sign is required"
+        },
+        "rules":{
+          "name":{
+            "minLength": "The name must have at least 2 characters"
+          },
+          "lastName": {
+            "minLength": "The last name must have at least 2 characters"
+          },
+          "email":{
+            "validEmail": "Please enter a valid email address"
+          },
+          "password":{
+            "minLength": "The password must have at least 8 characters",
+            "maxLength": "The password only supports 127 characters",
+            "number": "The password must have at least a number",
+            "symbol": "The password must have at least a simbol"
+          },
+          "confirmPassword":{
+            "equals": "Enter the code send to your email"
+          }
         }
       }
     }

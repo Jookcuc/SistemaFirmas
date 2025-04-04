@@ -1,10 +1,12 @@
-import { StringsAuth, StringsHistorialDocumentos, StringsProfile } from "../../strings";
+import { StringsAuth, StringsHistorialDocumentos, StringsModalSign, StringsProfile, StringsRegister } from "../../strings";
 
 const es = {
   translation: {
     ...StringsAuth,
     ...StringsHistorialDocumentos,
-    ...StringsProfile
+    ...StringsProfile,
+    ...StringsModalSign,
+    ...StringsRegister
   }
 };
 

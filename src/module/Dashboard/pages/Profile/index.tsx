@@ -13,8 +13,8 @@ export const Profile = () => {
   const { t } = useTranslation()
 
   const steps = [
-    "Informacion Personal",
-    "Datos de Usuario"
+    t("StringsProfile.steps.personalIfno"),
+    t("StringsProfile.steps.userData")
   ];
 
   const {
@@ -297,7 +297,7 @@ export const Profile = () => {
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
-                  label={t("StringsProfile.inputs.confirm")}
+                  label={t("StringsProfile.inputs.confirmPassword")}
                   control={control}
                   type="password"
                   rules={{
