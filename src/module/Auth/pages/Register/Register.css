@@ -24,6 +24,7 @@
 
     .formStep {
         padding: 3rem 2rem;
+        display: flex !important;
     }
 
     .stepperRegister{
@@ -32,14 +33,6 @@
 
     .registerDivider{
         display: flex !important;
-    }
-
-    #registerStep1{
-        display: flex;
-    }
-
-    #registerStep2{
-        display: flex;
     }
 }
 

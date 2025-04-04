@@ -73,7 +73,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     register("signature", { required: t("StringsAuth.required.signRequired") });
-  }, [register]);
+  }, [register])
 
   const sign = (signature: string) => {
     setValue("signature", signature);
@@ -130,7 +130,7 @@ export const RegisterPage = () => {
   return (
     <LoginLayout title={t("StringsAuth.title.createAccount")} className="backgroundLayout">
       <Box component="form" sx={{ display: "flex", paddingTop: "0" }} onSubmit={onSubmit} noValidate>
-        <Box className="formStep" id="registerStep2" sx={{ display: activeStep === 0 ? "flex" : "none" }}>
+        <Box className="formStep" sx={{ display: activeStep === 0 ? "flex" : "none" }}>
           <Input
             id="name"
             name="name"
@@ -238,7 +238,7 @@ export const RegisterPage = () => {
             display: "none"
           }} />
 
-        <Box className="formStep inactive" id="registerStep2" sx={{ display: activeStep === 1 ? "flex" : "none" }}>
+        <Box className="formStep inactive" sx={{ display: activeStep === 1 ? "flex" : "none" }}>
           <Input
             id="email"
             name="email"
