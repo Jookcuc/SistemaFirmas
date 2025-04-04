@@ -16,8 +16,8 @@ export const RegisterPage = () => {
   const { t } = useTranslation();
 
   const steps = [
-    t("StringsAuth.steps.personalData"),
-    t("StringsAuth.steps.accessData")
+    t("StringsRegister.steps.personalData"),
+    t("StringsRegister.steps.accessData")
   ];
 
   const {
@@ -72,7 +72,7 @@ export const RegisterPage = () => {
   }, [name, lastName, productKey, signature]);
 
   useEffect(() => {
-    register("signature", { required: t("StringsAuth.required.signRequired") });
+    register("signature", { required: t("StringsRegister.required.sign") });
   }, [register])
 
   const sign = (signature: string) => {
@@ -128,19 +128,19 @@ export const RegisterPage = () => {
   };
 
   return (
-    <LoginLayout title={t("StringsAuth.title.createAccount")} className="backgroundLayout">
+    <LoginLayout title={t("StringsRegister.title.createAccount")} className="backgroundLayout">
       <Box component="form" sx={{ display: "flex", paddingTop: "0" }} onSubmit={onSubmit} noValidate>
         <Box className="formStep" sx={{ display: activeStep === 0 ? "flex" : "none" }}>
           <Input
             id="name"
             name="name"
-            label={t("StringsAuth.inputs.name")}
+            label={t("StringsRegister.inputs.name")}
             icon={UserIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.nameRequired"),
+              required: t("StringsRegister.required.name"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.nameLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.name.minLength") : true
               }
             }}
           />
@@ -148,13 +148,13 @@ export const RegisterPage = () => {
           <Input
             id="lastName"
             name="lastName"
-            label={t("StringsAuth.inputs.lastName")}
+            label={t("StringsRegister.inputs.lastName")}
             icon={UserIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.lastNameRequired"),
+              required: t("StringsRegister.required.lastName"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.lastNameLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.lastName.minLength") : true
               }
             }}
           />
@@ -162,13 +162,13 @@ export const RegisterPage = () => {
           <Input
             id="key"
             name="productKey"
-            label={t("StringsAuth.inputs.productKey")}
+            label={t("StringsRegister.inputs.productKey")}
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.productKeyRequired"),
+              required: t("StringsRegister.required.productKey"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.productKeyLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.productKey.isValid") : true
               }
             }}
           />
@@ -203,7 +203,7 @@ export const RegisterPage = () => {
               </Box>
 
               <Button variant="contained" onClick={handleOpen} sx={{ width: "30%" }}>
-                {t("StringsAuth.buttons.sign")}
+                {t("StringsRegister.buttons.sign")}
               </Button>
             </Box>
 
@@ -224,7 +224,7 @@ export const RegisterPage = () => {
             className="stepperRegister"
             disabled={!name || !lastName || !productKey || !signature}
           >
-            {t("StringsAuth.buttons.next")}
+            {t("StringsRegister.buttons.next")}
           </Button>
         </Box>
 
@@ -242,15 +242,15 @@ export const RegisterPage = () => {
           <Input
             id="email"
             name="email"
-            label={t("StringsAuth.inputs.email")}
+            label={t("StringsRegister.inputs.email")}
             type="email"
             icon={EmailIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.emailObligatory"),
+              required: t("StringsRegister.required.email"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: t("StringsAuth.validations.emailValid")
+                message: t("StringsRegister.rules.email.isValid")
               }
             }}
           />
@@ -258,27 +258,27 @@ export const RegisterPage = () => {
           <Input
             id="password"
             name="password"
-            label={t("StringsAuth.inputs.password")}
+            label={t("StringsRegister.inputs.password")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.passwordObligatory"),
+              required: t("StringsRegister.required.password"),
               minLength: {
                 value: 8,
-                message: t("StringsAuth.validations.passwordMinLength")
+                message: t("StringsRegister.rules.password.minLength")
               },
               maxLength: {
                 value: 127,
-                message: t("StringsAuth.validations.passwordMaxLength")
+                message: t("StringsRegister.rules.password.maxLength")
               },
               validate: (value: string) => {
                 if (!/\d/.test(value)) {
-                  return t("StringsAuth.validations.passwordNumber")
+                  return t("StringsRegister.rules.password.number")
                 }
 
                 if (!/[\W_]/.test(value)) {
-                  return t("StringsAuth.validations.passwordSymbol")
+                  return t("StringsRegister.rules.password.symbol")
                 }
               }
             }}
@@ -287,15 +287,15 @@ export const RegisterPage = () => {
           <Input
             id="confirmPassword"
             name="confirmPassword"
-            label={t("StringsAuth.inputs.confirmPassword")}
+            label={t("StringsRegister.inputs.confirmPassword")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.confirmPasswordRequired"),
+              required: t("StringsRegister.required.confirmPassword"),
               validate: (value: string) => {
                 if (value !== password) {
-                  return t("StringsAuth.validations.confirmPassword")
+                  return t("StringsRegister.rules.confirmPassword.equals")
                 }
               }
             }}
@@ -306,7 +306,7 @@ export const RegisterPage = () => {
             variant="contained"
             disabled={!name || !lastName || !productKey || !signature || !email || !password || !confirmPassword}
           >
-            {t("StringsAuth.buttons.registerButton")}
+            {t("StringsRegister.buttons.registerButton")}
           </Button>
         </Box>
       </Box>
