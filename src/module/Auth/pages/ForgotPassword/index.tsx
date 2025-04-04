@@ -9,6 +9,7 @@ import keyIcon from '../../../../core/icon/IconsLogin/KeyIcon.svg';
 import ForgotImag from '../../../../assets/assetsLogin/forgotPasswordImg.svg';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ForgotPassword: React.FC = () => {
   const {t} = useTranslation();
@@ -27,21 +28,32 @@ export const ForgotPassword: React.FC = () => {
       confirmPassword: ""
     }
   });
-  
 
   const password = watch('password');
-  
+  const navigate = useNavigate();
+
+  const getFormMessage = () => {
+    switch (formStage) {
+      case "email":
+        return t("StringsAuth.texts.putEmail");
+      case "code":
+        return t("StringsAuth.texts.enterCode");
+      case "password":
+        return t("StringsAuth.texts.newPassword");
+      default:
+        return "";
+    }
+  };
+
   const onSubmit: SubmitHandler<ForgotFormData> = (data) => {
     console.log('Form Data:', data);
     
     if (formStage === 'email') {
-
       setFormStage('code');
     } 
     else if (formStage === 'code') {
-
       setFormStage('password');
-   
+
       reset({
         ...data,
         password: "",
@@ -49,10 +61,8 @@ export const ForgotPassword: React.FC = () => {
       });
     } 
     else {
-
       console.log('Restablecimiento de contraseña completo:', data);
-  
-      window.location.href = "./Login";
+      navigate("/auth/login");
     }
   };
   
@@ -64,11 +74,7 @@ export const ForgotPassword: React.FC = () => {
             
             <Box className="formContainer" component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
               <Typography sx={{ fontSize: "small", color:"grey"}}>
-                {formStage === 'email' 
-                  ? t('StringsAuth.texts.putEmail')
-                  : formStage === 'code'
-                    ? t('StringsAuth.texts.enterCode')
-                    : t('StringsAuth.texts.newPassword')}
+                {getFormMessage()}
               </Typography>
               
               {/* Campo de Email visible solo en las primeras dos etapas */}
@@ -145,11 +151,20 @@ export const ForgotPassword: React.FC = () => {
                           value: 127,
                           message: t("StringsAuth.validations.passwordMaxLength")
                         },
+                        validate: (value: string) => {
+                          if (!/\d/.test(value)) {
+                            return t("StringsAuth.validations.passwordNumber")
+                          }
+          
+                          if (!/[\W_]/.test(value)) {
+                            return t("StringsAuth.validations.passwordSymbol")
+                          }
+                        }
                       }}
                     />
                   </Box>
                   
-                  <Box className="inpuntContainer">
+                  <Box className="inputContainer">
                     <Input
                       className="textField"
                       id="confirmPassword"
@@ -160,11 +175,12 @@ export const ForgotPassword: React.FC = () => {
                       control={control}
                       name="confirmPassword"
                       rules={{
-                        required: t("StringsAuth.required.confirmPasswordRequired") || "Debes confirmar la contraseña",
-                        validate: value => 
-                          value === password || 
-                          t("StringsAuth.validations.confirmPassword") || 
-                          "Las contraseñas no coinciden"
+                        required: t("StringsAuth.required.confirmPasswordRequired"),
+                        validate: (value: string) => {
+                          if (value !== password) {
+                            return t("StringsAuth.validations.confirmPassword")
+                          }
+                        }
                       }}
                     />
                   </Box>
