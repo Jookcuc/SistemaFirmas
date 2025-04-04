@@ -53,14 +53,14 @@ export const AuthMailPage = () => {
   }
 
   return(    
-    <LoginLayout title={t("StringsAuth.title.emailVerification")} className="layoutAuthMail">
+    <LoginLayout title={t("StringsAuthMail.title")} className="layoutAuthMail">
       <Box className="authMailContainer" component="div">
         <Typography 
           component="h4"
           fontWeight={500}
           color="#808080"
         >
-          {t("StringsAuth.texts.verifyEmail")}
+          {t("StringsAuthMail.description")}
         </Typography>
 
         <Box component="form" onSubmit={onSubmit}>
@@ -80,7 +80,7 @@ export const AuthMailPage = () => {
           
           {error && (
             <Typography color="error">
-              {t("StringsAuth.required.confirmationCodeRequired")}
+              {t("StringsAuthMail.required")}
             </Typography>
           )}
 
@@ -90,7 +90,7 @@ export const AuthMailPage = () => {
             type="submit"
             fullWidth
           >
-            {t("StringsAuth.buttons.verifyCode")}
+            {t("StringsAuthMail.button")}
           </Button>
         </Box>
       </Box>

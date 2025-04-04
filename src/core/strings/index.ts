@@ -3,3 +3,4 @@ export * from "./HistorialDocumentos";
 export * from "./TextProfile";
 export * from "./TextModalSign"
 export * from "./TextRegister"
+export * from "./TextAuthMail"
