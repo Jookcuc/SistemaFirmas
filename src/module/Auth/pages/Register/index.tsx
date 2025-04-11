@@ -7,7 +7,7 @@ import EmailIcon from '../../../../core/icon/IconsRegister/EmailIcon.svg'
 import KeyIcon from '../../../../core/icon/IconsRegister/KeyIcon.svg'
 import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg'
 import UserIcon from '../../../../core/icon/IconsRegister/UserIcon.svg'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { RegisterFormData } from './Register.interface'
 import { useTranslation } from 'react-i18next'
 
@@ -70,10 +70,6 @@ export const RegisterPage = () => {
       trigger(["name", "lastName", "productKey", "signature"]);
     }
   }, [name, lastName, productKey, signature]);
-
-  useEffect(() => {
-    register("signature", { required: t("StringsRegister.required.sign") });
-  }, [register])
 
   const sign = (signature: string) => {
     setValue("signature", signature);
@@ -173,50 +169,57 @@ export const RegisterPage = () => {
             }}
           />
 
-          <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.17rem"
-          }}>
-            <Box className="firmBox">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  gap: "1rem",
-                  width: "70%",
-                  height: "3.5rem",
-                  paddingX: "0.7rem",
-                  border: "solid 1px #b5b5b5",
-                  borderRadius: "8px",
-                  borderColor: errors.signature ? "#c23f38" : "#b5b5b5",
-                  backgroundColor: "#ececec",
-                  paddingBottom: 0
-                }}
-              >
-                <InputAdornment position="start">
-                  <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
-                </InputAdornment>
-
-                <img src={signature} style={{ maxHeight: "6.3vh" }} />
+          <Controller
+            name="signature"
+            control={control}
+            rules={{ required: t("StringsRegister.required.sign")}}
+            render={({field, fieldState: {error}}) =>(
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.17rem"
+              }}>
+                <Box className="firmBox">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      gap: "1rem",
+                      width: "70%",
+                      height: "3.5rem",
+                      paddingX: "0.7rem",
+                      border: "solid 1px #b5b5b5",
+                      borderRadius: "8px",
+                      borderColor: errors.signature ? "#c23f38" : "#b5b5b5",
+                      backgroundColor: "#ececec",
+                      paddingBottom: 0
+                    }}
+                  >
+                    <InputAdornment position="start">
+                      <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
+                    </InputAdornment>
+  
+                    <img src={field.value} style={{ maxHeight: "6.3vh" }} />
+                  </Box>
+  
+                  <Button variant="contained" onClick={handleOpen} sx={{ width: "30%" }}>
+                    {t("StringsRegister.buttons.sign")}
+                  </Button>
+                </Box>
+  
+                <FormHelperText
+                  error
+                  sx={{
+                    marginTop: 0,
+                    marginLeft: "14px",
+                  }}
+                >
+                  {error?.message || " "}
+                </FormHelperText>
               </Box>
-
-              <Button variant="contained" onClick={handleOpen} sx={{ width: "30%" }}>
-                {t("StringsRegister.buttons.sign")}
-              </Button>
-            </Box>
-
-            <FormHelperText
-              error
-              sx={{
-                marginTop: 0,
-                marginLeft: "14px",
-              }}
-            >
-              {errors.signature?.message || " "}
-            </FormHelperText>
-          </Box>
+            )}
+          />
 
           <Button
             variant="contained"
@@ -279,6 +282,14 @@ export const RegisterPage = () => {
 
                 if (!/[\W_]/.test(value)) {
                   return t("StringsRegister.rules.password.symbol")
+                }
+
+                if (!/[A-Z]/.test(value)) {
+                  return t("StringsRegister.rules.password.upper");
+                }
+
+                if (!/[a-z]/.test(value)) {
+                  return t("StringsRegister.rules.password.lower");
                 }
               }
             }}

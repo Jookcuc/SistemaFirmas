@@ -170,7 +170,13 @@ export const Profile = () => {
                       }}
                       onClick={handleOpenFileExplorer}
                     >
-                      <img src={PenIcon}/>
+                      <img 
+                        src={PenIcon}
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem"
+                        }}
+                      />
                     </IconButton>
                   }
                 >

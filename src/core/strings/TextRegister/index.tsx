@@ -46,7 +46,9 @@ export const StringsRegister = {
         "minLength": "La contraseña debe tener al menos 8 caracteres",
         "maxLength": "La contraseña debe tener como maximo 127 caracteres",
         "number": "La contraseña debe de contener al menos un número",
-        "symbol": "La contraseña debe tener al menos un simbolo"
+        "symbol": "La contraseña debe tener al menos un simbolo",
+        "lower": "La contraseña debe contener al menos una letra minúscula",
+        "upper": "La contraseña debe contener al menos una letra mayúscula"
       },
       "confirmPassword":{
         "equals": "Las contraseñas son distintas"
