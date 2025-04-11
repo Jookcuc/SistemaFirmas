@@ -2,7 +2,7 @@ import './profile.css'
 import { Avatar, Badge, Box, Button, Divider, FormHelperText, IconButton, InputAdornment, Step, StepButton, Stepper, Typography } from "@mui/material"
 import { Header } from "../../../../core/components/header"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { Input, SignatureModal } from "../../../../core"
 import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg'
 import { ProfileData } from './Profile.interface'
@@ -23,7 +23,6 @@ export const Profile = () => {
       control,
       setValue,
       trigger,
-      register,
       formState: { errors, isSubmitted }
     } = useForm<ProfileData>({
       defaultValues: {
@@ -39,13 +38,12 @@ export const Profile = () => {
 
   const name = watch("name")
   const lastName = watch("lastName")
-  const signature = watch("signature")
   const email = watch("email")
   const password = watch("password")
   const confirmPassword = watch("confirmPassword")
 
   const [open, setOpen] = useState(false)
-  const [avatarSrc, setAvatarSrc] = useState("/profile.jpg")
+  const [avatarSrc, setAvatarSrc] = useState("")
   const [activeStep, setActiveStep] = useState(0)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -79,14 +77,21 @@ export const Profile = () => {
       setActiveStep(step)
   }
 
-  //@ts-ignore
+  const formatNameDisplay = (name?: string, lastName?: string): string => {
+    const safeName = name || "\u00A0"
+    const safeLastName = lastName || "\u00A0"
+    return `${safeName}\n${safeLastName}`
+  }
+
+  const getInitials = (name?: string, lastName?: string) => {
+    const first = name?.trim()?.[0] || " "
+    const last = lastName?.trim()?.[0] || " "
+    return (first + last).toUpperCase()
+  }
+  
   const onSubmit = handleSubmit((data) => {
     //Insert the code when you send the data
   })
-
-  useEffect(() => {
-      register("signature", { required: t("StringsProfile.required.sign") });
-    }, [register]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -113,9 +118,11 @@ export const Profile = () => {
 
       <Box className="profileInformation">
         <Typography 
-          variant="h5"
+          variant="h6"
           sx={{
-            paddingTop: "2vh"
+            fontWeight: "Medium",
+            color: "#2F2F2F",
+            paddingY: "2rem"
           }}
         >
           {t("StringsProfile.title.pageTitle")}
@@ -127,7 +134,15 @@ export const Profile = () => {
           className="userData"
           noValidate
         >
-          <Typography variant="h6"sx={{paddingX: "1.2rem"}}>
+          <Typography 
+            variant="h6"
+            sx={{
+              fontWeight: "Medium",
+              color: "#2F2F2F",
+              paddingX: "1.2rem",
+              paddingTop: "0.3rem"
+            }}
+          >
             {t("StringsProfile.title.sectionTitle")}
           </Typography>
 
@@ -138,8 +153,7 @@ export const Profile = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap:"1.7rem",
-                  paddingBottom: "2.5rem"
+                  gap:"1.7rem"
                 }}
               >
                 <Badge
@@ -160,19 +174,21 @@ export const Profile = () => {
                     </IconButton>
                   }
                 >
-                  <Avatar 
+                  <Avatar
                     src={avatarSrc}
                     alt="Usuario"
                     onClick={handleOpenFileExplorer}
                     sx={{
-                      height:"20dvh",
-                      width:"20dvh"
+                      height:"20vh",
+                      width:"20vh"
                     }}
-                  />
+                  >
+                    {getInitials(name, lastName)}
+                  </Avatar>
                 </Badge>
                 
                 <Typography variant="h6" sx={{whiteSpace: "pre-line", textAlign: "center"}}>
-                  {(name || "\u00A0") + "\n" + (lastName || "\u00A0") }
+                  {formatNameDisplay(name, lastName)}
                 </Typography>
                 
                 <Typography color="textDisabled" variant="h6">
@@ -180,31 +196,39 @@ export const Profile = () => {
                 </Typography>
               </Box>
               
-              <Box className="profileFirmContainer">
-                <Box className="profileFirm">
-                  <Box className="profileFirmField" sx={{borderColor: errors.signature ? "#c23f38" : "#b5b5b5"}}>
-                    <InputAdornment position="start">
-                      <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
-                    </InputAdornment>
-                  
-                    <img src={signature} style={{ maxHeight: "5vh"}} />
-                  </Box>
-                  <FormHelperText
-                    error
-                    sx={{
-                      marginTop: 0,
-                      marginLeft: "14px",
-                    }}
-                  >
-                    {errors.signature?.message || " "}
-                  </FormHelperText>
-                </Box>
-                
-                <Button variant="contained" onClick={handleOpen} fullWidth  className="profileFirmButton">
-                  {t("StringsProfile.buttons.sign")}
-                </Button>
+              <Box sx={{marginTop: "1.5rem"}}>
+                <Controller
+                  name= "signature"
+                  control = {control}
+                  rules={{ required: t("StringsProfile.required.sign") }}
+                  render={({ field, fieldState: { error } }) => (
+                    <Box className="profileFirmContainer">
+                      <Box className="profileFirm">
+                        <Box className="profileFirmField" sx={{borderColor: errors.signature ? "#c23f38" : "#b5b5b5"}}>
+                          <InputAdornment position="start">
+                            <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
+                          </InputAdornment>
+                        
+                          <img src={field.value} style={{ maxHeight: "5vh"}} />
+                        </Box>
+                        <FormHelperText
+                          error
+                          sx={{
+                            marginTop: 0,
+                            marginLeft: "14px",
+                          }}
+                        >
+                          {error?.message || " "}
+                        </FormHelperText>
+                      </Box>
+                      
+                      <Button variant="contained" onClick={handleOpen} fullWidth  className="profileFirmButton">
+                        {t("StringsProfile.buttons.sign")}
+                      </Button>
+                    </Box>
+                  )}
+                />
               </Box>
-                  
             </Box>
             
             <Divider
@@ -283,6 +307,14 @@ export const Profile = () => {
                     
                     if (!/[\W_]/.test(value)) {
                       return  t("StringsProfile.rules.password.symbol")
+                    }
+
+                    if (!/[A-Z]/.test(value)) {
+                      return t("StringsProfile.rules.password.upper");
+                    }
+
+                    if (!/[a-z]/.test(value)) {
+                      return t("StringsProfile.rules.password.lower");
                     }
                   }
                 }}

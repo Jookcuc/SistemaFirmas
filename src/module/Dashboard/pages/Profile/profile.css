@@ -3,23 +3,23 @@
 }
 
 .userData{
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     background-color: #FFFFFF;
     border-radius: 8px;
-    margin-top: 1rem;
     padding: 1rem;
 }
 
 .userProfile{
-    display: flex;
+    display: flex !important;
+    align-items: center;
 }
 
 .userProfileStep{
-    display: flex;
     flex-direction: column;
-    gap: 0.7rem;
-    padding: 1rem 0;
+    justify-content: center;
+    padding-top: 1rem;
+    gap: 2vh;
     width: 100%;
 }
 
@@ -28,13 +28,13 @@
 }
 
 .profileFirm{
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     margin-bottom: 0.6rem;
 }
 
 .profileFirmField{
-    display: flex;
+    display: flex !important;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
@@ -46,10 +46,14 @@
     gap: 1rem;
 }
 
+.stepperProfile{
+    padding-top: 1rem;
+}
+
 @media screen and (min-width: 768px){
 
     .userProfile{
-        margin-top: 1rem;
+        margin-top: 2vh;
     }
 
     .userProfileStep{
@@ -64,6 +68,13 @@
 
     .stepperProfile{
         display: none !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (min-height: 768px){
+    .userProfileStep{
+        height: 40rem;
+        max-height: 62vh;
     }
 }
 
