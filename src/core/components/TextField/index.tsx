@@ -93,6 +93,9 @@ export function Input<T extends FieldValues>({
                 </InputAdornment>
               ) : null,
               endAdornment: endAdornment,
+            },
+            inputLabel: {
+              shrink: true
             }
           }}
           margin="dense"

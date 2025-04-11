@@ -7,7 +7,7 @@ import EmailIcon from '../../../../core/icon/IconsRegister/EmailIcon.svg'
 import KeyIcon from '../../../../core/icon/IconsRegister/KeyIcon.svg'
 import PenIcon from '../../../../core/icon/IconsRegister/PenIcon.svg'
 import UserIcon from '../../../../core/icon/IconsRegister/UserIcon.svg'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { RegisterFormData } from './Register.interface'
 import { useTranslation } from 'react-i18next'
 
@@ -16,8 +16,8 @@ export const RegisterPage = () => {
   const { t } = useTranslation();
 
   const steps = [
-    t("StringsAuth.steps.personalData"),
-    t("StringsAuth.steps.accessData")
+    t("StringsRegister.steps.personalData"),
+    t("StringsRegister.steps.accessData")
   ];
 
   const {
@@ -70,10 +70,6 @@ export const RegisterPage = () => {
       trigger(["name", "lastName", "productKey", "signature"]);
     }
   }, [name, lastName, productKey, signature]);
-
-  useEffect(() => {
-    register("signature", { required: t("StringsAuth.required.signRequired") });
-  }, [register]);
 
   const sign = (signature: string) => {
     setValue("signature", signature);
@@ -128,19 +124,19 @@ export const RegisterPage = () => {
   };
 
   return (
-    <LoginLayout title={t("StringsAuth.title.createAccount")} className="backgroundLayout">
+    <LoginLayout title={t("StringsRegister.title.createAccount")} className="backgroundLayout">
       <Box component="form" sx={{ display: "flex", paddingTop: "0" }} onSubmit={onSubmit} noValidate>
-        <Box className="formStep" id="registerStep2" sx={{ display: activeStep === 0 ? "flex" : "none" }}>
+        <Box className="formStep" sx={{ display: activeStep === 0 ? "flex" : "none" }}>
           <Input
             id="name"
             name="name"
-            label={t("StringsAuth.inputs.name")}
+            label={t("StringsRegister.inputs.name")}
             icon={UserIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.nameRequired"),
+              required: t("StringsRegister.required.name"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.nameLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.name.minLength") : true
               }
             }}
           />
@@ -148,13 +144,13 @@ export const RegisterPage = () => {
           <Input
             id="lastName"
             name="lastName"
-            label={t("StringsAuth.inputs.lastName")}
+            label={t("StringsRegister.inputs.lastName")}
             icon={UserIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.lastNameRequired"),
+              required: t("StringsRegister.required.lastName"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.lastNameLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.lastName.minLength") : true
               }
             }}
           />
@@ -162,61 +158,68 @@ export const RegisterPage = () => {
           <Input
             id="key"
             name="productKey"
-            label={t("StringsAuth.inputs.productKey")}
+            label={t("StringsRegister.inputs.productKey")}
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.productKeyRequired"),
+              required: t("StringsRegister.required.productKey"),
               validate: (value: string) => {
-                return (value.length < 2) ? t("StringsAuth.validations.productKeyLength") : true
+                return (value.length < 2) ? t("StringsRegister.rules.productKey.isValid") : true
               }
             }}
           />
 
-          <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.17rem"
-          }}>
-            <Box className="firmBox">
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  gap: "1rem",
-                  width: "70%",
-                  height: "3.5rem",
-                  paddingX: "0.7rem",
-                  border: "solid 1px #b5b5b5",
-                  borderRadius: "8px",
-                  borderColor: errors.signature ? "#c23f38" : "#b5b5b5",
-                  backgroundColor: "#ececec",
-                  paddingBottom: 0
-                }}
-              >
-                <InputAdornment position="start">
-                  <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
-                </InputAdornment>
-
-                <img src={signature} style={{ maxHeight: "6.3vh" }} />
+          <Controller
+            name="signature"
+            control={control}
+            rules={{ required: t("StringsRegister.required.sign")}}
+            render={({field, fieldState: {error}}) =>(
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.17rem"
+              }}>
+                <Box className="firmBox">
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      gap: "1rem",
+                      width: "70%",
+                      height: "3.5rem",
+                      paddingX: "0.7rem",
+                      border: "solid 1px #b5b5b5",
+                      borderRadius: "8px",
+                      borderColor: errors.signature ? "#c23f38" : "#b5b5b5",
+                      backgroundColor: "#ececec",
+                      paddingBottom: 0
+                    }}
+                  >
+                    <InputAdornment position="start">
+                      <img src={PenIcon} alt="icon" style={{ minWidth: 20, minHeight: 20, maxWidth: 20, maxHeight: 20 }} />
+                    </InputAdornment>
+  
+                    <img src={field.value} style={{ maxHeight: "6.3vh" }} />
+                  </Box>
+  
+                  <Button variant="contained" onClick={handleOpen} sx={{ width: "30%" }}>
+                    {t("StringsRegister.buttons.sign")}
+                  </Button>
+                </Box>
+  
+                <FormHelperText
+                  error
+                  sx={{
+                    marginTop: 0,
+                    marginLeft: "14px",
+                  }}
+                >
+                  {error?.message || " "}
+                </FormHelperText>
               </Box>
-
-              <Button variant="contained" onClick={handleOpen} sx={{ width: "30%" }}>
-                {t("StringsAuth.buttons.sign")}
-              </Button>
-            </Box>
-
-            <FormHelperText
-              error
-              sx={{
-                marginTop: 0,
-                marginLeft: "14px",
-              }}
-            >
-              {errors.signature?.message || " "}
-            </FormHelperText>
-          </Box>
+            )}
+          />
 
           <Button
             variant="contained"
@@ -224,7 +227,7 @@ export const RegisterPage = () => {
             className="stepperRegister"
             disabled={!name || !lastName || !productKey || !signature}
           >
-            {t("StringsAuth.buttons.next")}
+            {t("StringsRegister.buttons.next")}
           </Button>
         </Box>
 
@@ -238,19 +241,19 @@ export const RegisterPage = () => {
             display: "none"
           }} />
 
-        <Box className="formStep inactive" id="registerStep2" sx={{ display: activeStep === 1 ? "flex" : "none" }}>
+        <Box className="formStep inactive" sx={{ display: activeStep === 1 ? "flex" : "none" }}>
           <Input
             id="email"
             name="email"
-            label={t("StringsAuth.inputs.email")}
+            label={t("StringsRegister.inputs.email")}
             type="email"
             icon={EmailIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.emailObligatory"),
+              required: t("StringsRegister.required.email"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: t("StringsAuth.validations.emailValid")
+                message: t("StringsRegister.rules.email.isValid")
               }
             }}
           />
@@ -258,27 +261,35 @@ export const RegisterPage = () => {
           <Input
             id="password"
             name="password"
-            label={t("StringsAuth.inputs.password")}
+            label={t("StringsRegister.inputs.password")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.passwordObligatory"),
+              required: t("StringsRegister.required.password"),
               minLength: {
                 value: 8,
-                message: t("StringsAuth.validations.passwordMinLength")
+                message: t("StringsRegister.rules.password.minLength")
               },
               maxLength: {
                 value: 127,
-                message: t("StringsAuth.validations.passwordMaxLength")
+                message: t("StringsRegister.rules.password.maxLength")
               },
               validate: (value: string) => {
                 if (!/\d/.test(value)) {
-                  return t("StringsAuth.validations.passwordNumber")
+                  return t("StringsRegister.rules.password.number")
                 }
 
                 if (!/[\W_]/.test(value)) {
-                  return t("StringsAuth.validations.passwordSymbol")
+                  return t("StringsRegister.rules.password.symbol")
+                }
+
+                if (!/[A-Z]/.test(value)) {
+                  return t("StringsRegister.rules.password.upper");
+                }
+
+                if (!/[a-z]/.test(value)) {
+                  return t("StringsRegister.rules.password.lower");
                 }
               }
             }}
@@ -287,15 +298,15 @@ export const RegisterPage = () => {
           <Input
             id="confirmPassword"
             name="confirmPassword"
-            label={t("StringsAuth.inputs.confirmPassword")}
+            label={t("StringsRegister.inputs.confirmPassword")}
             type="password"
             icon={KeyIcon}
             control={control}
             rules={{
-              required: t("StringsAuth.required.confirmPasswordRequired"),
+              required: t("StringsRegister.required.confirmPassword"),
               validate: (value: string) => {
                 if (value !== password) {
-                  return t("StringsAuth.validations.confirmPassword")
+                  return t("StringsRegister.rules.confirmPassword.equals")
                 }
               }
             }}
@@ -306,7 +317,7 @@ export const RegisterPage = () => {
             variant="contained"
             disabled={!name || !lastName || !productKey || !signature || !email || !password || !confirmPassword}
           >
-            {t("StringsAuth.buttons.registerButton")}
+            {t("StringsRegister.buttons.registerButton")}
           </Button>
         </Box>
       </Box>

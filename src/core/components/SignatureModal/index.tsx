@@ -4,11 +4,13 @@ import { FC, useRef } from 'react';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CloudAdd from '../../icon/CloudAdd/cloud-add.svg'
 import ReactSignatureCanvas from 'react-signature-canvas';
+import { useTranslation } from 'react-i18next';
 
 export const SignatureModal:FC<SignatureModalProps> =({open, handleClose, setFirm}) => {
   
   const sigCanvas = useRef<ReactSignatureCanvas>(null)
 
+  const { t } = useTranslation()
 
   const handleSaveSignature = () => {
     let firmData = ""
@@ -60,15 +62,21 @@ export const SignatureModal:FC<SignatureModalProps> =({open, handleClose, setFir
         </Box>
 
         <Box>
-          <DialogTitle sx={{paddingBottom: 0}}> Subir Firma </DialogTitle>
-          <DialogContent sx={{color: "#888"}}> Escribe tu firma en la pizarra y selecciona subir </DialogContent>
+          <DialogTitle sx={{paddingBottom: 0}}>
+            {t("StringsModalSign.tittle")}
+          </DialogTitle>
+          <DialogContent sx={{color: "#888"}}>
+            {t("StringsModalSign.description")}
+          </DialogContent>
         </Box>
       </Box>
 
       <Divider />
 
       <Box>
-        <DialogTitle sx={{paddingBottom: "0.8rem"}}> Pizarra </DialogTitle>
+        <DialogTitle sx={{paddingBottom: "0.8rem"}}>
+          {t("StringsModalSign.board")}
+        </DialogTitle>
         <ReactSignatureCanvas 
           ref={sigCanvas}
           canvasProps={{
@@ -99,7 +107,7 @@ export const SignatureModal:FC<SignatureModalProps> =({open, handleClose, setFir
               paddingY: "0.3rem"
             }}  
           > 
-            Subir Firma 
+            {t("StringsModalSign.button")}
           </Button>
         </DialogActions>
 
