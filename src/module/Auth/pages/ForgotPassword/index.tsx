@@ -79,7 +79,7 @@ export const ForgotPassword: React.FC = () => {
               
               {/* Campo de Email visible solo en las primeras dos etapas */}
               {(formStage === 'email' || formStage === 'code') && (
-                <Box className="inpuntContainer">
+                <Box className="inputContainer">
                   <Input
                     className="textField"
                     id="email"
@@ -103,7 +103,7 @@ export const ForgotPassword: React.FC = () => {
               
               {/* Campo de código visible en la segunda etapa */}
               {formStage === 'code' && (
-                <Box className="inpuntContainer">
+                <Box className="inputContainer">
                   <Input
                     className="textField"
                     id="code"
@@ -131,7 +131,7 @@ export const ForgotPassword: React.FC = () => {
               {/* Campos de contraseña visibles en la tercera etapa */}
               {formStage === 'password' && (
                 <>
-                  <Box className="inpuntContainer">
+                  <Box className="inputContainer">
                     <Input
                       className="textField"
                       id="password"
@@ -158,6 +158,14 @@ export const ForgotPassword: React.FC = () => {
           
                           if (!/[\W_]/.test(value)) {
                             return t("StringsAuth.validations.passwordSymbol")
+                          }
+                          
+                          if (!/[A-Z]/.test(value)) {
+                            return t("StringsAuth.validations.passwordUppercase");
+                          }
+                        
+                          if (!/[a-z]/.test(value)) {
+                            return t("StringsAuth.validations.passwordLowercase");
                           }
                         }
                       }}

@@ -10,7 +10,6 @@
 }
 
 .containerLoginItems{
-   
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,6 +66,13 @@
 
 @media screen and (min-width: 1020px) {
 
+    .containerLoginImage{
+        width: 50%;
+    }
+
+    .containerLoginItems{
+        width: 50%;
+    }
 
     .principalContainerLogin{
     width: 100%;
@@ -102,16 +108,18 @@
 
     .loginLayoutContainer{
         background-color: white !important;
+        margin-top: 5rem !important;
+        margin-bottom: 5rem !important ;
     }
 }
 
 @media screen and (min-width: 1200px)  {
     .containerLoginImage{
-        width: 55%;
+        width: 50%;
     }
     
     .containerLoginItems{
-        width: 45%;
+        width: 50%;
     }
 
 

@@ -56,6 +56,8 @@ export const StringsAuth = {
           "passwordMaxLength": "La contraseña puede tener como maximo 127 caracteres",
           "passwordNumber": "La contraseña debe tener al menos 1 número",
           "passwordSymbol": "La contraseña debe tener al menos 1 simbolo",
+          "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula.",
+          "passwordLowercase": "La contraseña debe contener al menos una letra minúscula.",
           "confirmPassword": "Las contraseñas son diferentes",
           "correctCode":"Porfavor ingrese un codigo valido"
         },
@@ -129,6 +131,8 @@ export const StringsAuth = {
           "passwordMaxLength": "The password only supports 127 characters",
           "passwordNumber": "The password must have at least a number",
           "passwordSymbol": "The password must have at least a simbol",
+          "passwordUppercase": "The password must contain at least one uppercase letter",
+          "passwordLowercase": "The password must contain at least one lowercase letter.",
           "confirmPassword": "The passwords are different",
           "correctCode":"Please enter a valid code"
         },
